@@ -1,0 +1,35 @@
+{
+  "account_name": "prod-us",
+  "region": "us-east-1",
+  "date_range": "2025-09-01 to 2025-09-07",
+  "services": [
+    {
+      "service": "Amazon Elastic Compute Cloud - EC2",
+      "cost_usd": 280.10,
+      "resources": 8,
+      "details": [
+        {"instance_type": "t2.medium", "count": 4, "cost_usd": 100.00},
+        {"instance_type": "m5.large", "count": 2, "cost_usd": 120.10},
+        {"instance_type": "r5.2xlarge", "count": 2, "cost_usd": 60.00}
+      ]
+    },
+    {
+      "service": "Amazon Simple Storage Service - S3",
+      "cost_usd": 120.50,
+      "resources": 4,
+      "details": [
+        {"bucket": "prod-app-data", "storage_gb": 800, "cost_usd": 80.00},
+        {"bucket": "user-uploads", "storage_gb": 300, "cost_usd": 40.50}
+      ]
+    },
+    {
+      "service": "Amazon DynamoDB",
+      "cost_usd": 95.00,
+      "resources": 2,
+      "details": [
+        {"table": "user-sessions", "read_capacity": 100, "write_capacity": 50, "cost_usd": 55.00},
+        {"table": "transactions", "read_capacity": 200, "write_capacity": 100, "cost_usd": 40.00}
+      ]
+    }
+  ]
+}

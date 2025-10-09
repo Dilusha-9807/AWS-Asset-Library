@@ -1,0 +1,36 @@
+{
+  "account_name": "prod-europe",
+  "region": "eu-west-1",
+  "date_range": "2025-09-01 to 2025-09-07",
+  "services": [
+    {
+      "service": "Amazon Elastic Compute Cloud - EC2",
+      "cost_usd": 540.75,
+      "resources": 20,
+      "details": [
+        {"instance_type": "t3.micro", "count": 10, "cost_usd": 140.00},
+        {"instance_type": "m5.large", "count": 5, "cost_usd": 200.50},
+        {"instance_type": "c5.xlarge", "count": 5, "cost_usd": 200.25}
+      ]
+    },
+    {
+      "service": "Amazon Lambda",
+      "cost_usd": 35.40,
+      "resources": 50,
+      "details": [
+        {"function": "image-processor", "invocations": 120000, "cost_usd": 20.00},
+        {"function": "event-logger", "invocations": 50000, "cost_usd": 15.40}
+      ]
+    },
+    {
+      "service": "Amazon CloudWatch",
+      "cost_usd": 22.80,
+      "resources": 100,
+      "details": [
+        {"metric": "EC2 CPU Utilization", "cost_usd": 10.00},
+        {"metric": "RDS Connections", "cost_usd": 7.50},
+        {"metric": "Lambda Invocations", "cost_usd": 5.30}
+      ]
+    }
+  ]
+}

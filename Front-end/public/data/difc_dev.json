@@ -1,0 +1,63 @@
+{
+  "account_name": "difc_dev",
+  "region": "ap-south-1",
+  "date_range": "2025-08-01 to 2025-08-27",
+  "services": [
+    {
+      "service": "Amazon Elastic Compute Cloud - EC2",
+      "cost_usd": 3.42,
+      "resources": 12,
+      "details": [
+        {
+          "instance_type": "t3.medium",
+          "count": 6,
+          "cost_usd": 1.61
+        },
+        {
+          "instance_type": "m5.large",
+          "count": 4,
+          "cost_usd": 1.27
+        },
+        {
+          "instance_type": "r5.xlarge",
+          "count": 2,
+          "cost_usd": 0.55
+        }
+      ]
+    },
+    {
+      "service": "Amazon Simple Storage Service - S3",
+      "cost_usd": 0.0,
+      "resources": 3,
+      "details": [
+        {
+          "bucket": "prod-data-backup",
+          "storage_gb": 500,
+          "cost_usd": 0.0
+        },
+        {
+          "bucket": "logs-archive",
+          "storage_gb": 120,
+          "cost_usd": 0.0
+        }
+      ]
+    },
+    {
+      "service": "Amazon RDS",
+      "cost_usd": 0.0,
+      "resources": 2,
+      "details": [
+        {
+          "db_engine": "PostgreSQL",
+          "instance_class": "db.m5.large",
+          "cost_usd": 0.0
+        },
+        {
+          "db_engine": "MySQL",
+          "instance_class": "db.t3.medium",
+          "cost_usd": 0.0
+        }
+      ]
+    }
+  ]
+}
