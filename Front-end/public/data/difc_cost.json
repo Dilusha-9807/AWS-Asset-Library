@@ -1,35 +1,33 @@
 {
-  "account_name": "prod-difc",
+  "account_name": "difc-prod",
   "region": "ap-south-1",
-  "date_range": "2025-09-01 to 2025-09-07",
+  "date_range": "2025-08-01 to 2025-08-27",
   "services": [
     {
-      "service": "Amazon Elastic Compute Cloud - EC2",
-      "cost_usd": 320.55,
-      "resources": 12,
+      "service": "Amazon Elastic Compute Cloud - Compute",
+      "cost_usd": 193.71,
       "details": [
-        {"instance_type": "t3.medium", "count": 6, "cost_usd": 150.25},
-        {"instance_type": "m5.large", "count": 4, "cost_usd": 120.00},
-        {"instance_type": "r5.xlarge", "count": 2, "cost_usd": 50.30}
+        {
+          "usage_type": "NoInstanceType",
+          "tag": "ApplicationName$db",
+          "amount_usd": 0.0106
+        },
+        {
+          "usage_type": "r6a.2xlarge",
+          "tag": "ApplicationName$db",
+          "amount_usd": 178.3532
+        },
+        {
+          "usage_type": "t3a.small",
+          "tag": "ApplicationName$db",
+          "amount_usd": 15.3504
+        }
       ]
     },
     {
-      "service": "Amazon Simple Storage Service - S3",
-      "cost_usd": 75.20,
-      "resources": 3,
-      "details": [
-        {"bucket": "prod-data-backup", "storage_gb": 500, "cost_usd": 50.00},
-        {"bucket": "logs-archive", "storage_gb": 120, "cost_usd": 25.20}
-      ]
-    },
-    {
-      "service": "Amazon RDS",
-      "cost_usd": 210.00,
-      "resources": 2,
-      "details": [
-        {"db_engine": "PostgreSQL", "instance_class": "db.m5.large", "cost_usd": 120.00},
-        {"db_engine": "MySQL", "instance_class": "db.t3.medium", "cost_usd": 90.00}
-      ]
+      "service": "Amazon Simple Storage Service",
+      "cost_usd": 0.0,
+      "details": []
     }
   ]
 }

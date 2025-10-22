@@ -40,7 +40,16 @@ export default function CostDashboard({ onBack }) {
             const { file, json } = r.value;
             // normalize JSON formats: allow objects with `services` or `daily_costs`
             if (json && Array.isArray(json.services)) {
-              loaded.push(json);
+              // normalize service details: copy amount_usd -> cost_usd when present
+              const normalized = JSON.parse(JSON.stringify(json));
+              normalized.services = normalized.services.map(svc => {
+                const svcCopy = { ...svc };
+                if (Array.isArray(svcCopy.details)) {
+                  svcCopy.details = svcCopy.details.map(d => ({ ...d, cost_usd: Number(d.cost_usd ?? d.amount_usd ?? d.cost_usd ?? 0) }));
+                }
+                return svcCopy;
+              });
+              loaded.push(normalized);
             } else if (json && Array.isArray(json.daily_costs)) {
               // convert daily_costs -> services summary
               const svcMap = new Map();
@@ -54,7 +63,9 @@ export default function CostDashboard({ onBack }) {
                 });
               });
               const services = Array.from(svcMap.values());
-              loaded.push({ account_name: json.account_name || file, region: json.region || '', date_range: json.date_range || json.month || '', services });
+              // ensure service details have cost_usd
+              const servicesWithCosts = services.map(s => ({ ...s, details: (s.details || []).map(d => ({ ...d, cost_usd: Number(d.cost_usd ?? d.amount_usd ?? 0) })) }));
+              loaded.push({ account_name: json.account_name || file, region: json.region || '', date_range: json.date_range || json.month || '', services: servicesWithCosts });
             } else {
               // unknown format - skip but record
               console.warn('Skipping unsupported cost file format:', file);
@@ -103,7 +114,6 @@ export default function CostDashboard({ onBack }) {
                   <tr>
                     <th>Service</th>
                     <th>Cost (USD)</th>
-                    <th>Resources</th>
                     <th>Details</th>
                   </tr>
                 </thead>
@@ -112,7 +122,6 @@ export default function CostDashboard({ onBack }) {
                     <tr key={idx2}>
                       <td>{svc.service}</td>
                       <td>${svc.cost_usd.toLocaleString()}</td>
-                      <td>{svc.resources}</td>
                       <td>
                         <button className="view-res-btn" onClick={() => setModal({ open: true, service: svc.service, details: svc.details })}>
                           View Resources

@@ -1,224 +1,33 @@
 {
-  "account_name": "prod_us",
+  "account_name": "us-prod",
   "region": "ap-south-1",
-  "month": "2025-08",
-  "daily_costs": [
+  "date_range": "2025-08-01 to 2025-08-27",
+  "services": [
     {
-      "date": "2025-08-01",
-      "total_cost_usd": 3.42,
-      "services": [
+      "service": "Amazon Elastic Compute Cloud - Compute",
+      "cost_usd": 193.71,
+      "details": [
         {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.42
+          "usage_type": "NoInstanceType",
+          "tag": "ApplicationName$db",
+          "amount_usd": 0.0106
         },
         {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
+          "usage_type": "r6a.2xlarge",
+          "tag": "ApplicationName$db",
+          "amount_usd": 178.3532
         },
         {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
+          "usage_type": "t3a.small",
+          "tag": "ApplicationName$db",
+          "amount_usd": 15.3504
         }
       ]
     },
     {
-      "date": "2025-08-02",
-      "total_cost_usd": 3.85,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.85
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-03",
-      "total_cost_usd": 4.12,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 4.12
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-04",
-      "total_cost_usd": 3.60,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.60
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-05",
-      "total_cost_usd": 3.70,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.70
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-06",
-      "total_cost_usd": 3.80,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.80
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-07",
-      "total_cost_usd": 3.60,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.60
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-08",
-      "total_cost_usd": 3.00,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.00
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-09",
-      "total_cost_usd": 3.00,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.00
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-10",
-      "total_cost_usd": 2.60,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 2.60
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-11",
-      "total_cost_usd": 3.20,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.20
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
-    },
-    {
-      "date": "2025-08-12",
-      "total_cost_usd": 3.60,
-      "services": [
-        {
-          "service": "Amazon Elastic Compute Cloud - EC2",
-          "cost_usd": 3.60
-        },
-        {
-          "service": "Amazon Simple Storage Service - S3",
-          "cost_usd": 0.0
-        },
-        {
-          "service": "Amazon RDS",
-          "cost_usd": 0.0
-        }
-      ]
+      "service": "Amazon Simple Storage Service",
+      "cost_usd": 0.0,
+      "details": []
     }
-
   ]
 }

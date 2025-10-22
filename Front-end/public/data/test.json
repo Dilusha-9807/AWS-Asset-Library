@@ -1,5 +1,5 @@
 {
-  "account_name": "uk_prod",
+  "account_name": "test",
   "region": "ap-south-1",
   "date_range": "2025-08-01 to 2025-08-27",
   "services": [
