@@ -1,0 +1,562 @@
+{
+    "type": "assets",
+    "TagFilter": {
+        "WorkloadType": "database-server"
+    },
+    "Timestamp": "2025-10-27 12:15:44.110095",
+    "Resources": {
+        "EC2": [
+            {
+                "ResourceType": "EC2",
+                "Region": "us-east-1",
+                "InstanceId": "i-0345b07aa02f70f75",
+                "Name": "EC2-NV-GTNT-PROD-FEED-EDB-RO_2_NEW",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "us-east-1b",
+                "LaunchTime": "2025-06-13 06:08:45+00:00",
+                "PrivateIP": "172.20.166.137",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-078a789cb17720efe",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ada8acbbf1f6286c",
+                        "SizeGiB": 1000,
+                        "VolumeType": "io2",
+                        "IOPS": 4200,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-07537eb95db0b178f",
+                        "SizeGiB": 900,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0dfa5d24e9a9242b1",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "us-east-1",
+                "InstanceId": "i-0af4eb9bed93fabff",
+                "Name": "EC2-NV-GTNT-PROD-FEED-EDB-PG-BOUNCE-2",
+                "InstanceType": "c6i.large",
+                "State": "running",
+                "AvailabilityZone": "us-east-1b",
+                "LaunchTime": "2025-06-13 06:45:08+00:00",
+                "PrivateIP": "172.20.166.223",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0b96ba5b7b8c0130b",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-00bdb1ba68c492104",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0a96eedb5ae21ba72",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "us-east-1",
+                "InstanceId": "i-0d09741342b7aa961",
+                "Name": "EC2-NV-GTNT-PROD-FEED-EDB-RW_NEW",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "us-east-1a",
+                "LaunchTime": "2025-06-13 05:31:34+00:00",
+                "PrivateIP": "172.20.166.113",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-09fcfce232b58ec9e",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-05b16cfa13d905065",
+                        "SizeGiB": 1000,
+                        "VolumeType": "io2",
+                        "IOPS": 4200,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0bfb14092b5617088",
+                        "SizeGiB": 900,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-080a3590ffa441592",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "us-east-1",
+                "InstanceId": "i-04a80f84143533848",
+                "Name": "EC2-NV-GTNT-PROD-FEED-EDB-RO_NEW",
+                "InstanceType": "r6i.8xlarge",
+                "State": "running",
+                "AvailabilityZone": "us-east-1a",
+                "LaunchTime": "2025-06-13 05:48:14+00:00",
+                "PrivateIP": "172.20.166.117",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0f9c3379274b36fb9",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-01b4a388be2794d45",
+                        "SizeGiB": 1000,
+                        "VolumeType": "io2",
+                        "IOPS": 6000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-05a64b0c9f6d4bd61",
+                        "SizeGiB": 900,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0c148046b7b542c7a",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "us-east-1",
+                "InstanceId": "i-086c20160c0e1f490",
+                "Name": "EC2-NV-GTNT-PROD-FEED-EDB-PG-BOUNCE",
+                "InstanceType": "c6i.large",
+                "State": "running",
+                "AvailabilityZone": "us-east-1a",
+                "LaunchTime": "2025-06-13 06:37:14+00:00",
+                "PrivateIP": "172.20.166.123",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0d5f43d7f39da88bd",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0849ede75b13643ea",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e2705a3daac40307",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-031b29e5b28124fc0",
+                "Name": "EC2-SG-GTNT-PROD-FEED-STORE-DB",
+                "InstanceType": "c5a.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2024-09-13 10:30:35+00:00",
+                "PrivateIP": "172.20.178.119",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-00625a8f6adce0eb5",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-083812be5ba516f10",
+                        "SizeGiB": 15,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-08bdcdac945ba57b0",
+                        "SizeGiB": 4,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0e2341ca0e3b25f4f",
+                "Name": "EC2-SG-GTNT-PROD-FEED-OHLC-DB-TEST",
+                "InstanceType": "r6a.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-02-01 06:01:33+00:00",
+                "PrivateIP": "172.20.178.114",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-05af9176a6f5ade68",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-01b311787ebb2116d",
+                        "SizeGiB": 450,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0f21f3d7aed257b09",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-07201155fdd20165c",
+                        "SizeGiB": 20,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0a6228f7345c284b9",
+                        "SizeGiB": 4,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0155159c5ce4a7c84",
+                "Name": "EC2-SG-GTNT-PROD-FEED-RDS-ALERT-DB",
+                "InstanceType": "r6a.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-02-01 05:34:34+00:00",
+                "PrivateIP": "172.20.178.150",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-09fdcb09ef3fce969",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0b7d23899c2b20136",
+                        "SizeGiB": 8,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-05fa4686ee4a72137",
+                        "SizeGiB": 8,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-045f5ee556a8a43af",
+                        "SizeGiB": 8,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0590e89b95c68df23",
+                "Name": "EC2-SG-GMA-PROD-FEED-EDB-RO_2_NEW",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-20 20:40:16+00:00",
+                "PrivateIP": "172.20.183.137",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0095147edc9962ca4",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06cdc7b58e7134d7e",
+                        "SizeGiB": 1000,
+                        "VolumeType": "io2",
+                        "IOPS": 4200,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0428efcb0edf21f7a",
+                        "SizeGiB": 900,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0813060d982f384e5",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-08f1e7d9ceeec2295",
+                "Name": "EC2-SG-GTNT-PROD-FEED-EDB-PG-BOUNCE-2",
+                "InstanceType": "c6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-23 11:35:41+00:00",
+                "PrivateIP": "172.20.183.223",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-00d9173966489025b",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-063f680674dd60f0f",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-097e958a7f3d90b70",
+                "Name": "EC2-SG-GMA-PROD-FEED-EDB-RW_NEW",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-20 20:35:38+00:00",
+                "PrivateIP": "172.20.183.113",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-013b8e8280914d5ce",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0b5e0f65d1a929eb1",
+                        "SizeGiB": 1000,
+                        "VolumeType": "io2",
+                        "IOPS": 4200,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0549bec3a9cee44c5",
+                        "SizeGiB": 900,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-099f04bf48ced0771",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0e7f592df418333d5",
+                "Name": "EC2-SG-GTNT-PROD-FEED-EDB-RO_NEW",
+                "InstanceType": "r6i.8xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-06-01 14:25:44+00:00",
+                "PrivateIP": "172.20.183.117",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-023cec53a507eee90",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-04c43fca07c7fe09c",
+                        "SizeGiB": 1000,
+                        "VolumeType": "io2",
+                        "IOPS": 6000,
+                        "Throughput": null,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0fd9fa23d5a4e4a20",
+                        "SizeGiB": 900,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0a472252e8963f547",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-01573da614b7ca00f",
+                "Name": "EC2-SG-GTNT-PROD-FEED-EDB-PG-BOUNCE",
+                "InstanceType": "c6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-23 11:29:36+00:00",
+                "PrivateIP": "172.20.183.123",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0446384f4182cb08f",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-037aa405575022cc4",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            }
+        ],
+        "S3": []
+    }
+}

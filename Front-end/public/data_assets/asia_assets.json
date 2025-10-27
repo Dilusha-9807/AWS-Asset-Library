@@ -1,388 +1,1539 @@
 {
+    "type": "assets",
     "TagFilter": {
-        "ApplicationName": "db"
+        "WorkloadType": "database-server"
     },
-    "Region": "us-east-1",
-    "Timestamp": "2025-10-10 09:36:02.588474",
+    "Timestamp": "2025-10-27 12:08:45.141217",
     "Resources": {
         "EC2": [
             {
                 "ResourceType": "EC2",
-                "InstanceId": "i-06871052dc3133979",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-bo-oms-db-2",
-                "InstanceType": "r6i.4xlarge",
-                "State": "running",
-                "AvailabilityZone": "us-east-1a",
-                "LaunchTime": "2025-04-09 13:31:52+00:00",
-                "PrivateIP": "172.21.193.113",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0908982a423c66348",
+                "Name": "ec2-sg-gma-prod-at_mongodb-restore",
+                "InstanceType": "c5a.large",
+                "State": "stopped",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2024-10-02 11:56:16+00:00",
+                "PrivateIP": "172.20.186.141",
                 "PublicIP": null,
                 "Volumes": [
                     {
-                        "VolumeId": "vol-0cb74f6d318e021a4",
-                        "SizeGiB": 30,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0230e2cf018b584e1",
-                        "SizeGiB": 100,
-                        "VolumeType": "io2",
-                        "IOPS": 1500,
-                        "Throughput": null,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0be7a8d5c6f13e73f",
-                        "SizeGiB": 400,
-                        "VolumeType": "gp3",
-                        "IOPS": 3500,
-                        "Throughput": 200,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-003e32b1333cdfeb9",
-                        "SizeGiB": 75,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    }
-                ]
-            },
-            {
-                "ResourceType": "EC2",
-                "InstanceId": "i-0a0cf3ddbe346a811",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-bo-oms-db-1",
-                "InstanceType": "r6i.4xlarge",
-                "State": "running",
-                "AvailabilityZone": "us-east-1a",
-                "LaunchTime": "2025-04-09 13:27:46+00:00",
-                "PrivateIP": "172.21.193.138",
-                "PublicIP": null,
-                "Volumes": [
-                    {
-                        "VolumeId": "vol-04f8bc34f7a284574",
-                        "SizeGiB": 30,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-00810c4819c6f0918",
-                        "SizeGiB": 100,
-                        "VolumeType": "io2",
-                        "IOPS": 1500,
-                        "Throughput": null,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0df2f79487247a2d0",
-                        "SizeGiB": 400,
-                        "VolumeType": "gp3",
-                        "IOPS": 3500,
-                        "Throughput": 200,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-01dc42ed8f0dd40a9",
-                        "SizeGiB": 75,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    }
-                ]
-            },
-            {
-                "ResourceType": "EC2",
-                "InstanceId": "i-015fd2b952dcd34d7",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-mongo-db",
-                "InstanceType": "r6i.xlarge",
-                "State": "running",
-                "AvailabilityZone": "us-east-1a",
-                "LaunchTime": "2025-04-09 18:57:48+00:00",
-                "PrivateIP": "172.21.193.115",
-                "PublicIP": null,
-                "Volumes": [
-                    {
-                        "VolumeId": "vol-095e0bd93844f9820",
-                        "SizeGiB": 30,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0d4fdf55636b413bd",
-                        "SizeGiB": 100,
-                        "VolumeType": "gp3",
-                        "IOPS": 4000,
-                        "Throughput": 250,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0370e2f9cf3037786",
+                        "VolumeId": "vol-0569581b9adfcfeeb",
                         "SizeGiB": 50,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-0963191359ee8c74b",
-                        "SizeGiB": 16,
+                        "VolumeId": "vol-06c358c875cfda177",
+                        "SizeGiB": 150,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0926dfac940b65c2b",
+                "Name": "ec2-sg-gma-dr-at_mongodb-01",
+                "InstanceType": "t3.medium",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-10-11 04:41:50+00:00",
+                "PrivateIP": "172.20.186.60",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-059a434de06bd3e06",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-053847d1d190ef9fb",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-06c36ea1de6f76700",
+                "Name": "ec2-sg-gtn-dr-at_mongodb_aml3-arbiter-01",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1c",
+                "LaunchTime": "2025-05-10 11:55:34+00:00",
+                "PrivateIP": "172.20.191.36",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0293279cd7f39accf",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09ff9d7d3f77e57f2",
+                        "SizeGiB": 10,
+                        "VolumeType": "gp3",
+                        "IOPS": 4000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ef2288eca38de2eb",
+                        "SizeGiB": 8,
                         "VolumeType": "io2",
                         "IOPS": 6000,
                         "Throughput": null,
-                        "Encrypted": false
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ff3b1d6b0c4d1d30",
+                        "SizeGiB": 200,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
                     }
                 ]
             },
             {
                 "ResourceType": "EC2",
-                "InstanceId": "i-05703f941c340e5b3",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-db-1",
-                "InstanceType": "r6i.4xlarge",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0df6ffaad37ea7ec4",
+                "Name": "EC2-SG-GMA-PROD-AT_FO_DB_DEPLOYMENT-01",
+                "InstanceType": "t3.small",
                 "State": "running",
-                "AvailabilityZone": "us-east-1a",
-                "LaunchTime": "2025-04-09 13:34:55+00:00",
-                "PrivateIP": "172.21.193.43",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-02-14 12:19:27+00:00",
+                "PrivateIP": "172.20.184.44",
                 "PublicIP": null,
                 "Volumes": [
                     {
-                        "VolumeId": "vol-05616c4e6b9c278ec",
+                        "VolumeId": "vol-0b5bf22b059204a34",
                         "SizeGiB": 30,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-0a79862e74e4c8093",
-                        "SizeGiB": 100,
-                        "VolumeType": "io2",
-                        "IOPS": 1500,
-                        "Throughput": null,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0615e04168859a01e",
-                        "SizeGiB": 300,
-                        "VolumeType": "gp3",
-                        "IOPS": 3500,
-                        "Throughput": 200,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-09c1b5f60b4d38fdf",
-                        "SizeGiB": 75,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    }
-                ]
-            },
-            {
-                "ResourceType": "EC2",
-                "InstanceId": "i-07d7d187e9e7d863b",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-db-2",
-                "InstanceType": "r6i.4xlarge",
-                "State": "running",
-                "AvailabilityZone": "us-east-1a",
-                "LaunchTime": "2025-08-13 06:06:59+00:00",
-                "PrivateIP": "172.21.193.231",
-                "PublicIP": null,
-                "Volumes": [
-                    {
-                        "VolumeId": "vol-063dc8f461134dd46",
-                        "SizeGiB": 30,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0acaa27b767348f7f",
-                        "SizeGiB": 100,
-                        "VolumeType": "io2",
-                        "IOPS": 1500,
-                        "Throughput": null,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0d87f694cf078dd52",
-                        "SizeGiB": 300,
-                        "VolumeType": "gp3",
-                        "IOPS": 3500,
-                        "Throughput": 200,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-071ad3c00bf346e6b",
-                        "SizeGiB": 75,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    }
-                ]
-            },
-            {
-                "ResourceType": "EC2",
-                "InstanceId": "i-0782a94cf1cf8b091",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-mongo-db-arbitor",
-                "InstanceType": "r6i.large",
-                "State": "running",
-                "AvailabilityZone": "us-east-1b",
-                "LaunchTime": "2025-04-09 19:00:35+00:00",
-                "PrivateIP": "172.21.195.185",
-                "PublicIP": null,
-                "Volumes": [
-                    {
-                        "VolumeId": "vol-0b3c0c65012791fdc",
-                        "SizeGiB": 30,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0fd80a219da6a313e",
+                        "VolumeId": "vol-0518dc7befc228fd0",
                         "SizeGiB": 10,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     }
                 ]
             },
             {
                 "ResourceType": "EC2",
-                "InstanceId": "i-0b7bd908646522124",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-bo-oms-db-backup-server",
-                "InstanceType": "i3.4xlarge",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-00e61cc329be016d8",
+                "Name": "EC2-SG-GMA-PROD-AT_BO_DB_DEPLOYMENT-01",
+                "InstanceType": "t3.small",
                 "State": "running",
-                "AvailabilityZone": "us-east-1b",
-                "LaunchTime": "2025-04-09 18:46:43+00:00",
-                "PrivateIP": "172.21.195.109",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-02-14 12:56:52+00:00",
+                "PrivateIP": "172.20.184.46",
                 "PublicIP": null,
                 "Volumes": [
                     {
-                        "VolumeId": "vol-0927c791bfb4c8300",
+                        "VolumeId": "vol-0919ad388a31e13a1",
                         "SizeGiB": 30,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-03dc5dc6a305ab691",
-                        "SizeGiB": 200,
+                        "VolumeId": "vol-0d8b77842af8344e7",
+                        "SizeGiB": 10,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-06c75378647e2b578",
+                "Name": "ec2-sg-gma-prod-at_booms_db-history-01",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-08 07:40:06+00:00",
+                "PrivateIP": "172.20.191.4",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0f1cfc2afaa6559fc",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0027f16715cb0add2",
+                        "SizeGiB": 700,
                         "VolumeType": "gp3",
                         "IOPS": 3500,
-                        "Throughput": 200,
-                        "Encrypted": false
+                        "Throughput": 125,
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-0d9d5f98e2f9b7207",
-                        "SizeGiB": 400,
+                        "VolumeId": "vol-05c047b1b35671438",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-018db7d91cec83ab4",
+                        "SizeGiB": 55,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-08ab32c2d1ca442d5",
+                "Name": "ec2-sg-gtn-prod-at_booms_db_rocky-02",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "PrivateIP": "172.20.191.8",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0cfa635d663bd93f8",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-00f3b0dfd52118444",
+                        "SizeGiB": 850,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0781225b063f23388",
+                        "SizeGiB": 500,
                         "VolumeType": "gp3",
                         "IOPS": 3500,
-                        "Throughput": 200,
-                        "Encrypted": false
+                        "Throughput": 125,
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-016e952d85007408c",
+                        "VolumeId": "vol-0a9981c1933ba7a36",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-03656e845faca92d1",
                         "SizeGiB": 100,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     }
                 ]
             },
             {
                 "ResourceType": "EC2",
-                "InstanceId": "i-0075793e2b199f842",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-db-backup-server",
-                "InstanceType": "i3.4xlarge",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0b1ada0ef523b158a",
+                "Name": "ec2-sg-gtn-prod-at_booms_db_rocky-01",
+                "InstanceType": "r6i.4xlarge",
                 "State": "running",
-                "AvailabilityZone": "us-east-1b",
-                "LaunchTime": "2025-04-29 10:36:55+00:00",
-                "PrivateIP": "172.21.195.200",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "PrivateIP": "172.20.191.7",
                 "PublicIP": null,
                 "Volumes": [
                     {
-                        "VolumeId": "vol-045ab7bb40462f421",
-                        "SizeGiB": 30,
+                        "VolumeId": "vol-071b2e8f09889c7d9",
+                        "SizeGiB": 50,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-0c0290a0dd63b70ae",
+                        "VolumeId": "vol-0fe08b566bc1e0b7f",
+                        "SizeGiB": 850,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-02c24bc28dab4ea11",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0cb879c1eec2846be",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-017e4b261b7fe3973",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-061310e8035c0bda5",
+                "Name": "ec2-sg-gtn-prod-at_fooms_db_rocky-02",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:17+00:00",
+                "PrivateIP": "172.20.191.6",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0627ea5d56cce0f86",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-05808c3a8450c45bf",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 3000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-019f026b230ab6d0f",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-08afe4555513a7a15",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-046cfdf1b4d8533ab",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-01a220a23c9a801d3",
+                "Name": "ec2-sg-gtn-prod-at_mongodb_aml3-01",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "PrivateIP": "172.20.191.11",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-09626da7b93e040c4",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0cd0843b8b38bcdc9",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 4000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-07cc9c38d98e58702",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f73d17bc4fd70cf0",
+                        "SizeGiB": 16,
+                        "VolumeType": "io2",
+                        "IOPS": 6000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0dacca63dab449a37",
+                "Name": "ec2-sg-gtn-prod-at_booms_db_backup_rocky-01",
+                "InstanceType": "i3.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "PrivateIP": "172.20.191.9",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0ccca28d0090eac21",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-04ad39858a00cb3e5",
+                        "SizeGiB": 1500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-03f3c3927bf584d84",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0355efec4ef9ef271",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-00d534157d0dc844c",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-03387c3dbaaf2ef60",
+                "Name": "ec2-sg-gtn-prod-at_fooms_db_rocky-01",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:13+00:00",
+                "PrivateIP": "172.20.191.5",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0f0688257b8520d56",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ea9519ab9ce19ebb",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 3000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f10ba6bc17e05e3b",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0d7c18b5ae5a76475",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0c4de5e506ee88b0e",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-05e01e2759223313a",
+                "Name": "ec2-sg-gtn-prod-at_fooms_db_backup_rocky-01",
+                "InstanceType": "i3.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "PrivateIP": "172.20.191.10",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0a67b0cbfe9475339",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0870fd426e7708ea9",
                         "SizeGiB": 200,
                         "VolumeType": "gp3",
                         "IOPS": 3500,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-030550c9771d5424a",
+                        "VolumeId": "vol-05f3661e38a5a2cc6",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06a425d0f4c476ca6",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09ad6b8029f940ae4",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-058a986b412ec3d8b",
+                "Name": "ec2-sg-gtn-dr-at_fooms_dummy_db_rocky-01",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-10 12:06:47+00:00",
+                "PrivateIP": "172.20.191.22",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0f1a20cfc94b306cf",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f77037cfa6bfdd0e",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-04236063838bd9fcf",
+                "Name": "ec2-sg-gtn-dr-at_db_management_rocky-01",
+                "InstanceType": "c7i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-10 11:56:07+00:00",
+                "PrivateIP": "172.20.191.25",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-09a9f6d6c5b03ad8b",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0bf83519973e22b12",
+                        "SizeGiB": 10,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-01e3a30da19684842",
+                        "SizeGiB": 10,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0350eb42b9e081bc5",
+                "Name": "ec2-sg-gtn-dr-at_mongodb_aml3-02",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-10 11:56:38+00:00",
+                "PrivateIP": "172.20.191.24",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0d649568a58db8028",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e6672bfc608d0df4",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 4000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0b44b81a5a2283791",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09979ae7176ba5ed3",
+                        "SizeGiB": 16,
+                        "VolumeType": "io2",
+                        "IOPS": 6000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0af3b2688a64cd173",
+                "Name": "ec2-sg-gtn-dr-at_booms_db_rocky-03",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-10 12:06:47+00:00",
+                "PrivateIP": "172.20.191.21",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0d0497601c347b07e",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0d52105ea37e0193b",
+                        "SizeGiB": 850,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0c4e3446ee2e10a8f",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-045de30603529f415",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-074824f95dff63756",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-034a123ed95ec2247",
+                "Name": "ec2-sg-gtn-dr-at_fooms_db_rocky-03",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-10 12:06:47+00:00",
+                "PrivateIP": "172.20.191.20",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-094dd26eb14604218",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0a5e75fdc23d861d7",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 3000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e0cf66412544ae2e",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-036e0b18377c76662",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0d835f1ebb38ca35a",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0268202cda894aaf5",
+                "Name": "ec2-sg-gtn-dr-at_booms_dummy_db_rocky-01",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-05-10 11:56:57+00:00",
+                "PrivateIP": "172.20.191.23",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0a38f48b6cf23099c",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e5976037dc39017d",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0bc574ddbad882b88",
+                "Name": "ec2-sg-gtn-prod-at_db_jumpbox_aml03-01",
+                "InstanceType": "t3.micro",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-06-04 06:41:25+00:00",
+                "PrivateIP": "172.20.191.12",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-07adc5213aea94e8c",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-07a144d9c8cbacaf0",
+                        "SizeGiB": 10,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-02ee4a06174c55b30",
+                "Name": "EC2-SG-GMA-PROD-AT_WINDOWS_POWERBI-DB",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-08-14 10:28:37+00:00",
+                "PrivateIP": "172.20.184.28",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-05fbcbc3c495933df",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-01c3cc84a45c49699",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0dddc988ce7850fff",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_fooms_db_rocky-winbull-01-tmp",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-17 15:44:51+00:00",
+                "PrivateIP": "172.20.191.13",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0de7680328725c83d",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ff3c1d0b8c5367ad",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 1500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-091e98a0f71b265ca",
                         "SizeGiB": 300,
                         "VolumeType": "gp3",
                         "IOPS": 3500,
                         "Throughput": 200,
-                        "Encrypted": false
+                        "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-03cad90daa7d333f5",
+                        "VolumeId": "vol-0f75080b15e65bb46",
                         "SizeGiB": 100,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
+                        "Encrypted": true
                     }
                 ]
             },
             {
                 "ResourceType": "EC2",
-                "InstanceId": "i-0f4816fa35a799db7",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-history-db",
-                "InstanceType": "r6i.xlarge",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0556338d9cc0b2937",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_booms_db_rocky-winbull-01-tmp",
+                "InstanceType": "r6i.2xlarge",
                 "State": "running",
-                "AvailabilityZone": "us-east-1a",
-                "LaunchTime": "2025-09-23 07:59:44+00:00",
-                "PrivateIP": "172.21.193.108",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-17 15:44:51+00:00",
+                "PrivateIP": "172.20.191.14",
                 "PublicIP": null,
                 "Volumes": [
                     {
-                        "VolumeId": "vol-04764bc5917c46cdc",
-                        "SizeGiB": 30,
-                        "VolumeType": "gp3",
-                        "IOPS": 3000,
-                        "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-0636d654940859863",
+                        "VolumeId": "vol-0d90cd3a75245076e",
                         "SizeGiB": 50,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09b6d4199b7c2aa1d",
+                        "SizeGiB": 850,
+                        "VolumeType": "io2",
+                        "IOPS": 1500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09421b5cc08fb56be",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e8f3cb5bd50d0749",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-09dfc75c66b1253fc",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_booms_db_rocky-winbull-primary-01",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-18 06:15:31+00:00",
+                "PrivateIP": "172.20.191.80",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-06b64315254a68811",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-01ac11d92b12f3561",
+                        "SizeGiB": 700,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06c1c2e8f06232c3f",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f9bf12c5369c9e3e",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0b8d9e19c181e57a9",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-078a57a483b840815",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_fooms_db_rocky-winbull-02",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-18 06:15:31+00:00",
+                "PrivateIP": "172.20.191.72",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-06af63b19b8f0567c",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0fd6f56476133dda1",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0982bac9b07c48a37",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-042cbd413f8437837",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 3000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0606d2953adc06ea7",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0d0ca430f896ab932",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_booms_db_rocky-winbull-02",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-18 06:15:31+00:00",
+                "PrivateIP": "172.20.191.82",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-00e6173148d1cfb0e",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-08e776174d227731d",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0065c5776bfb88727",
+                        "SizeGiB": 700,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ec88397a5148e1ec",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-00dbdf8de6e1af0b7",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-07e43b8c464173464",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_fooms_db_rocky-winbull-primary-01",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-18 06:15:31+00:00",
+                "PrivateIP": "172.20.191.70",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-07ca40ed7c5c3b83f",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-07b07591f07cc315c",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 3000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0d6d92ce0a8e8b2b7",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0bee1fc4506f18749",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-00034cde1001fe3cb",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0fa8e5ef6b1e70456",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_fooms_db_backup_rocky-winbull-01",
+                "InstanceType": "i3en.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-25 03:51:01+00:00",
+                "PrivateIP": "172.20.191.74",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0064620400d9c5fe1",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-015363dcb33d66134",
+                        "SizeGiB": 200,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
                         "Throughput": 150,
                         "Encrypted": true
                     },
                     {
-                        "VolumeId": "vol-067dfd9beba474d57",
+                        "VolumeId": "vol-0f371e8b4c35c62b0",
                         "SizeGiB": 300,
                         "VolumeType": "gp3",
                         "IOPS": 3500,
+                        "Throughput": 175,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06ca75242963e1737",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-07a5982b17e0d2172",
+                        "SizeGiB": 8,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-001534560363c7049",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_booms_db_backup_rocky-winbull-01",
+                "InstanceType": "i3en.xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-25 03:57:45+00:00",
+                "PrivateIP": "172.20.191.84",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-076b6b323461b8b66",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09926b00f5f397b22",
+                        "SizeGiB": 1300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-01be0ec6768478c1f",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f68078f752274274",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06f31be6d862b03a0",
+                        "SizeGiB": 8,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0abf745af595db2d1",
+                "Name": "ec2-sg-gma-prod-at_booms_db-history-winbull-01",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1a",
+                "LaunchTime": "2025-09-25 04:07:34+00:00",
+                "PrivateIP": "172.20.191.92",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0b4c6c6a82cfc32f2",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0cf0f69f25dc813bd",
+                        "SizeGiB": 200,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
                         "Throughput": 150,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-065e42389170a6a6a",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 150,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-09b23c3a405609df0",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_booms_db_rocky-winbull-03",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-09-18 06:15:31+00:00",
+                "PrivateIP": "172.20.191.122",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0c09315e28ff9909c",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0d0c18caa82ae5a0b",
+                        "SizeGiB": 700,
+                        "VolumeType": "io2",
+                        "IOPS": 5000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0b62677ec55a2f1f9",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-08096886dce74d32e",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0bc8541f163724cee",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0cc569361de4a4973",
+                "Name": "ec2-sg-gtnt-asia-prod-gtnasia-prod-at_fooms_db_rocky-winbull-03",
+                "InstanceType": "r6i.2xlarge",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-09-18 06:15:31+00:00",
+                "PrivateIP": "172.20.191.112",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0ae9e9ede8235a9cc",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-009881fcde6330b8c",
+                        "SizeGiB": 32,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-08230678c0e9d3644",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 3000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06359ade51e40c032",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-07737e76bc2526111",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-0cfa2563597f39574",
+                "Name": "ec2-sg-gtn-dr-at_booms_dummy_db_rocky-winbull-01",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-09-25 04:13:44+00:00",
+                "PrivateIP": "172.20.191.104",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-04d8b6be0500dbdbe",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0bfd088d4d55ec152",
+                        "SizeGiB": 500,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e78c8720d4a7abba",
+                        "SizeGiB": 16,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "ap-southeast-1",
+                "InstanceId": "i-063a7ef948b9c6c82",
+                "Name": "ec2-sg-gtn-dr-at_fooms_dummy_db_rocky-winbull-01",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "ap-southeast-1b",
+                "LaunchTime": "2025-09-25 04:18:29+00:00",
+                "PrivateIP": "172.20.191.106",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-04ea76de3185893f8",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-080937139afe6510e",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0b08a1b48a547a9f9",
+                        "SizeGiB": 16,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
                         "Encrypted": true
                     }
                 ]

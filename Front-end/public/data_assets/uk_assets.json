@@ -1,0 +1,700 @@
+{
+    "type": "assets",
+    "TagFilter": {
+        "WorkloadType": "database-server"
+    },
+    "Timestamp": "2025-10-27 11:52:12.061154",
+    "Resources": {
+        "EC2": [
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-057acfa8822dd3007",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-fo-db-backup-server",
+                "InstanceType": "i3.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2b",
+                "LaunchTime": "2025-03-25 09:38:10+00:00",
+                "PrivateIP": "172.21.227.160",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-03a2105b5bc4812ad",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0e4c932f1d5b35aae",
+                        "SizeGiB": 200,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-060d11b45533f3fee",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0728e8a6119fc4ba7",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e6305f96db8cc401",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0a6040490178ef28b",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-bo-db-backup-server",
+                "InstanceType": "i3.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2b",
+                "LaunchTime": "2025-03-06 11:14:51+00:00",
+                "PrivateIP": "172.21.227.27",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0d467219cf0dd4727",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-00f744cb0a109096d",
+                        "SizeGiB": 200,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-082040460c222e81f",
+                        "SizeGiB": 400,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ab91b4d3aa666f5f",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0aad5d45fa1aff744",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0646b1745d4d9e808",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-mongo-db-arbitor",
+                "InstanceType": "r6i.large",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2b",
+                "LaunchTime": "2025-04-21 07:34:02+00:00",
+                "PrivateIP": "172.21.227.110",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0dc1716a22945e266",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-01c9994e4978f032b",
+                        "SizeGiB": 10,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0f99b2fb17c30b6c1",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-fo-oms-db-02",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-03-05 04:49:02+00:00",
+                "PrivateIP": "172.21.225.143",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-091711bd84da9ddf0",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-048fee7e60f0085f6",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 1500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-041f9c7a78adb3386",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f1cd32b3bc55869a",
+                        "SizeGiB": 75,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-087f237a757e5edd5",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0bd8327f272b50971",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-bo-oms-db-01",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-03-05 07:37:35+00:00",
+                "PrivateIP": "172.21.225.86",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-02e7588cab6751549",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-06ae6503f997a4023",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 2000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0c486b905fd9d6fa7",
+                        "SizeGiB": 400,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e8bd9df14ed9bdcf",
+                        "SizeGiB": 75,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f89f8020f53dbaae",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-01ea3281464a1f225",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-bo-oms-db-02",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-03-05 07:37:46+00:00",
+                "PrivateIP": "172.21.225.56",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0c3184d3a6e92ebbf",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-077f72c3e2584a20c",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 2000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f06b6608d6136eb3",
+                        "SizeGiB": 400,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0b830a95539f32c6f",
+                        "SizeGiB": 75,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-04a28f6768633c57e",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0985157c575245778",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-fo-oms-db-01",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-03-05 04:48:45+00:00",
+                "PrivateIP": "172.21.225.48",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0cb458af532c21fdd",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-024c8079e19b49818",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 1500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-097c050cc00cfe093",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0828b0bb657e007b6",
+                        "SizeGiB": 75,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0c1897e50ac5d38d2",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0a639f3f4655063e3",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-mongo-db",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-04-21 07:29:53+00:00",
+                "PrivateIP": "172.21.225.24",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0331a19e3844a0a29",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-05e720b441fd94735",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 4000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0f141c8a6be05e318",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-05a9bae03b0d35f42",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-history-db",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-06-02 12:29:10+00:00",
+                "PrivateIP": "172.21.225.243",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0627072ebcc845fbe",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0fee094488e8b6e20",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 150,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09d40533e8b922f89",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 150,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-052f17d279f58fa47",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-jumpbox-db-reports",
+                "InstanceType": "t3.micro",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-07-30 12:42:46+00:00",
+                "PrivateIP": "172.21.225.137",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-075b1d00cefb8ffaa",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-2",
+                "InstanceId": "i-0ca63aea8f6514d45",
+                "Name": "ec2-ldn-gtnt-prod-uk-gtneurope-windows-power-bi",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-2a",
+                "LaunchTime": "2025-08-27 20:32:36+00:00",
+                "PrivateIP": "172.21.225.141",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-09fcb58e017e65c34",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ab83f90c04010a52",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-1",
+                "InstanceId": "i-00b7002b39cc36367",
+                "Name": "ec2-ir-gtnt-dr-uk-gtneurope-bo-oms-db-dummy",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-1a",
+                "LaunchTime": "2025-03-05 04:50:30+00:00",
+                "PrivateIP": "172.23.145.126",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-011d48c41dfe39fcc",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-074d643c708ddf918",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-1",
+                "InstanceId": "i-051e3d27fbe215820",
+                "Name": "ec2-ir-gtnt-dr-uk-gtneurope-bo-oms-db-01",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-1a",
+                "LaunchTime": "2025-03-05 04:50:44+00:00",
+                "PrivateIP": "172.23.145.207",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0bffcd889c0870333",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-04c6819298a031f63",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 2000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-015ec033d5034ee3b",
+                        "SizeGiB": 400,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0a6fa563e73109003",
+                        "SizeGiB": 75,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-00165682b598c5761",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-1",
+                "InstanceId": "i-020f738bed096496f",
+                "Name": "ec2-ir-gtnt-dr-uk-gtneurope-mongo-db",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-1a",
+                "LaunchTime": "2025-04-21 07:34:45+00:00",
+                "PrivateIP": "172.23.145.60",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-068fbbc033942f5a0",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-04c54bc0aa470b4fa",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 4000,
+                        "Throughput": 250,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0a08dbfd3b1a2a898",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-1",
+                "InstanceId": "i-0900c4aff7d88a697",
+                "Name": "ec2-ir-gtnt-dr-uk-gtneurope-fo-oms-db-dummy",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-1a",
+                "LaunchTime": "2025-03-05 04:50:13+00:00",
+                "PrivateIP": "172.23.145.220",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-02afabe7fdf7c8d23",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-05ea61ae138064e65",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-1",
+                "InstanceId": "i-06b797cc58a482b12",
+                "Name": "ec2-ir-gtnt-dr-uk-gtneurope-fo-oms-db-01",
+                "InstanceType": "r6i.4xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-1a",
+                "LaunchTime": "2025-03-05 04:50:00+00:00",
+                "PrivateIP": "172.23.145.188",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-04e2aae6ca4266a38",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-016304364fb887c72",
+                        "SizeGiB": 100,
+                        "VolumeType": "io2",
+                        "IOPS": 1500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09313a2e6c69012df",
+                        "SizeGiB": 300,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0fcd1a29954af6a4e",
+                        "SizeGiB": 75,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-09e58c3a045a2facf",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 3500,
+                        "Throughput": null,
+                        "Encrypted": false
+                    }
+                ]
+            }
+        ],
+        "S3": []
+    }
+}
