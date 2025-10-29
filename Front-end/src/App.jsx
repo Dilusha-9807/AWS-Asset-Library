@@ -2,8 +2,8 @@ import { useState } from 'react';
 import './App.css';
 
 import Home from './pages/Home';
-import AssetsLibrary from './pages/AssetsLibrary';
-import CostDashboard from './pages/CostDashboard';
+import AssetsLibrary from './pages/EC2_S3_DETAILS/AssetsLibrary';
+import CostDashboard from './pages/COST_MANAGEMENT/CostDashboard';
 
 function App() {
   const [view, setView] = useState('home');

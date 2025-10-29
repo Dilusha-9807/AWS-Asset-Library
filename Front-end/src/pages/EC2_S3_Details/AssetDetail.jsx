@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css';
+import '../../App.css';
+
+const mapping = {
+  'DIFC PROD': '/data_assets/difc_assets.json',
+  'ASIA PROD': '/data_assets/asia_assets.json',
+  'FEED PROD': '/data_assets/feed_assets.json',
+  'UK PROD': '/data_assets/uk_assets.json',
+  'US PROD': '/data_assets/us_assets.json',
+};
 
 export default function AssetDetail({ name, onBack }) {
   const [data, setData] = useState(null);
@@ -8,13 +16,6 @@ export default function AssetDetail({ name, onBack }) {
   // local modal state for selected volume
   const [volModal, setVolModal] = useState(null);
 
-  const mapping = {
-    'DIFC PROD': '/data_assets/difc_assets.json',
-    'ASIA PROD': '/data_assets/asia_assets.json',
-    'FEED PROD': '/data_assets/feed_assets.json',
-    'UK PROD': '/data_assets/uk_assets.json',
-    'US PROD': '/data_assets/us_assets.json',
-  };
 
   useEffect(() => {
     let mounted = true;
