@@ -35,8 +35,71 @@ export default function EdbOsVersions({ onBack }) {
       .finally(() => setLoading(false));
   }, []);
 
+  // Helper to manage last applied dates in localStorage
+  const getLastAppliedDate = (region, ip, ec2Name) => {
+    const key = `last_applied_date_${region}_${ip}_${ec2Name}`;
+    return localStorage.getItem(key) || '';
+  };
+
+  const setLastAppliedDate = (region, ip, ec2Name, date) => {
+    const key = `last_applied_date_${region}_${ip}_${ec2Name}`;
+    localStorage.setItem(key, date);
+  };
+
+  // Server row component to handle state per row
+  const ServerRow = ({ server, region }) => {
+    const storageKey = `last_applied_date_${region}_${server.ip}_${server.ec2_name}`;
+    const [lastAppliedDate, setLastAppliedDate] = useState(() => {
+      return localStorage.getItem(storageKey) || '';
+    });
+
+    const handleDateChange = (e) => {
+      const newDate = e.target.value;
+      setLastAppliedDate(newDate);
+      localStorage.setItem(storageKey, newDate);
+    };
+
+    // Format date for display (e.g., "2025-11-03" to "Nov 3, 2025")
+    const formattedDate = lastAppliedDate ? new Date(lastAppliedDate).toLocaleDateString() : '';
+
+    return (
+      <tr>
+        <td>{server.ip}</td>
+        <td>{server.ec2_name}</td>
+        <td>{server.edb_version}</td>
+        <td>{server.os_version}</td>
+        <td>
+          <div className="date-cell">
+            <span className="date-display">
+              {formattedDate || 'Not set'}
+            </span>
+            <label className="calendar-label">
+              <button 
+                className="calendar-button" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  const dateInput = e.currentTarget.parentElement.querySelector('input[type="date"]');
+                  dateInput.showPicker();
+                }}
+                title="Select date"
+              >
+                📅
+              </button>
+              <input
+                type="date"
+                value={lastAppliedDate}
+                onChange={handleDateChange}
+                className="date-input"
+              />
+            </label>
+          </div>
+        </td>
+      </tr>
+    );
+  };
+
   // Helper to render server details table
-  const renderServersTable = (servers) => (
+  const renderServersTable = (servers, region) => (
     <table className="nested-table">
       <thead>
         <tr>
@@ -44,16 +107,16 @@ export default function EdbOsVersions({ onBack }) {
           <th>EC2 Name</th>
           <th>EDB Version</th>
           <th>OS Version</th>
+          <th>Last applied date</th>
         </tr>
       </thead>
       <tbody>
-        {servers.map((server, idx) => (
-          <tr key={(server.ip || '') + '-' + idx}>
-            <td>{server.ip}</td>
-            <td>{server.ec2_name}</td>
-            <td>{server.edb_version}</td>
-            <td>{server.os_version}</td>
-          </tr>
+        {servers.map((server) => (
+          <ServerRow 
+            key={`${server.ip}-${server.ec2_name}`}
+            server={server}
+            region={region}
+          />
         ))}
       </tbody>
     </table>
@@ -90,7 +153,7 @@ export default function EdbOsVersions({ onBack }) {
                         {loading && <p>Loading data...</p>}
                         {error && <p style={{ color: 'var(--danger, #b00020)' }}>{error}</p>}
                         {!loading && !error && r?.servers ? (
-                          renderServersTable(r.servers)
+                          renderServersTable(r.servers, regionName)
                         ) : (
                           !loading && !r && <p>No data available for {regionName} region.</p>
                         )}
@@ -153,6 +216,62 @@ export default function EdbOsVersions({ onBack }) {
           
           .nested-table th {
             background: var(--table-header-bg, #f1f3f5);
+          }
+
+          .date-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+          }
+
+          .date-display {
+            color: var(--text-color, #333);
+          }
+
+          .calendar-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+          }
+
+          .calendar-button:hover {
+            opacity: 1;
+          }
+
+          .calendar-label {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+          }
+
+          .date-input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+          }
+
+          .date-input::-webkit-calendar-picker-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            cursor: pointer;
+            border: 1px solid var(--border-color, #ddd);
+            border-radius: 4px;
+            min-width: 130px;
           }
         `}</style>
       </div>
