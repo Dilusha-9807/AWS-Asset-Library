@@ -2,31 +2,38 @@ import React, { useState, useEffect } from 'react';
 import '../../App.css';
 
 export default function EdbOsVersions({ onBack }) {
-  const [usData, setUsData] = useState(null);
+  const [regionsData, setRegionsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [expandedRegion, setExpandedRegion] = useState(null);
 
-  // Fetch US data on mount
+  // Fetch all region JSON files on mount
   useEffect(() => {
     setLoading(true);
-    fetch('/data_os_edb_versions/us_os_edb.json')
-      .then(res => res.json())
-      .then(data => {
-        setUsData(data);
+    const files = [
+      'us_os_edb.json',
+      'uk_os_edb.json',
+      'asia_os_edb.json',
+      'difc_os_edb.json',
+      'feed_os_edb.json',
+    ];
+
+    Promise.all(files.map(f =>
+      fetch('/data_os_edb_versions/' + f).then(res => {
+        if (!res.ok) throw new Error(`${f} HTTP ${res.status}`);
+        return res.json();
+      })
+    ))
+      .then(results => {
+        // results is an array of region objects
+        setRegionsData(results || []);
         setError(null);
       })
       .catch(err => {
-        setError('Failed to load US region data');
-        console.error('Error loading US data:', err);
+        setError('Failed to load region data');
+        console.error('Error loading region JSONs:', err);
       })
       .finally(() => setLoading(false));
   }, []);
-
-  // Toggle region expansion
-  const toggleRegion = (regionId) => {
-    setExpandedRegion(expandedRegion === regionId ? null : regionId);
-  };
 
   // Helper to render server details table
   const renderServersTable = (servers) => (
@@ -34,7 +41,6 @@ export default function EdbOsVersions({ onBack }) {
       <thead>
         <tr>
           <th>IP</th>
-          <th>Port</th>
           <th>EC2 Name</th>
           <th>EDB Version</th>
           <th>OS Version</th>
@@ -42,9 +48,8 @@ export default function EdbOsVersions({ onBack }) {
       </thead>
       <tbody>
         {servers.map((server, idx) => (
-          <tr key={server.ip + '-' + server.port + '-' + idx}>
+          <tr key={(server.ip || '') + '-' + idx}>
             <td>{server.ip}</td>
-            <td>{server.port}</td>
             <td>{server.ec2_name}</td>
             <td>{server.edb_version}</td>
             <td>{server.os_version}</td>
@@ -67,56 +72,33 @@ export default function EdbOsVersions({ onBack }) {
           <table className="data-table">
             <thead>
               <tr>
-                <th style={{ width: '10%' }}>Region</th>
-                <th style={{ width: '20%' }}>AWS Account</th>
-                <th style={{ width: '15%' }}>Server Count</th>
-                <th style={{ width: '55%' }}>Details</th>
+                <th style={{ width: '8%' }}>Region</th>
+                <th style={{ width: '13%' }}>AWS Account</th>
+                <th style={{ width: '79%' }}>Details</th>
               </tr>
             </thead>
             <tbody>
-              {/* US Region - with actual data */}
-              <tr className={expandedRegion === 'us' ? 'expanded' : ''}>
-                <td>
-                  <button 
-                    className="expand-btn"
-                    onClick={() => toggleRegion('us')}
-                  >
-                    {expandedRegion === 'us' ? '▼' : '▶'} US
-                  </button>
-                </td>
-                <td>{usData?.aws_account_id || 'Loading...'}</td>
-                <td>{usData?.servers?.length || 0} servers</td>
-                <td>
-                  {expandedRegion === 'us' && usData?.servers && (
-                    <div className="details-section">
-                      {renderServersTable(usData.servers)}
-                    </div>
-                  )}
-                </td>
-              </tr>
-
-              {/* Other regions - placeholders */}
-              {['DIFC', 'ASIA', 'UK', 'FEED'].map(region => (
-                <tr key={region} className={expandedRegion === region.toLowerCase() ? 'expanded' : ''}>
-                  <td>
-                    <button 
-                      className="expand-btn"
-                      onClick={() => toggleRegion(region.toLowerCase())}
-                    >
-                      {expandedRegion === region.toLowerCase() ? '▼' : '▶'} {region}
-                    </button>
-                  </td>
-                  <td>Not configured</td>
-                  <td>0 servers</td>
-                  <td>
-                    {expandedRegion === region.toLowerCase() && (
+              {/* Map each expected region to a row */}
+              {['DIFC', 'FEED', 'ASIA', 'UK', 'US'].map(regionName => {
+                const r = regionsData.find(d => (d.environment || '').toLowerCase() === regionName.toLowerCase());
+                return (
+                  <tr key={regionName}>
+                    <td>{regionName}</td>
+                    <td>{r?.aws_account_id || 'Not configured'}</td>
+                    <td>
                       <div className="details-section">
-                        <p>No data available for {region} region.</p>
+                        {loading && <p>Loading data...</p>}
+                        {error && <p style={{ color: 'var(--danger, #b00020)' }}>{error}</p>}
+                        {!loading && !error && r?.servers ? (
+                          renderServersTable(r.servers)
+                        ) : (
+                          !loading && !r && <p>No data available for {regionName} region.</p>
+                        )}
                       </div>
-                    )}
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
