@@ -35,16 +35,7 @@ export default function EdbOsVersions({ onBack }) {
       .finally(() => setLoading(false));
   }, []);
 
-  // Helper to manage last applied dates in localStorage
-  const getLastAppliedDate = (region, ip, ec2Name) => {
-    const key = `last_applied_date_${region}_${ip}_${ec2Name}`;
-    return localStorage.getItem(key) || '';
-  };
-
-  const setLastAppliedDate = (region, ip, ec2Name, date) => {
-    const key = `last_applied_date_${region}_${ip}_${ec2Name}`;
-    localStorage.setItem(key, date);
-  };
+  // (last-applied-date helpers removed — ServerRow manages localStorage per-row)
 
   // Server row component to handle state per row
   const ServerRow = ({ server, region }) => {

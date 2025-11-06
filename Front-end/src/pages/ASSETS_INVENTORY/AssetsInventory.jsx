@@ -35,53 +35,96 @@ export default function AssetsInventory({ onBack }) {
       .finally(() => setLoading(false));
   }, []);
 
-  // Server row component to handle state per row
+  // Server row component with persistent fields (stored in localStorage)
   const ServerRow = ({ server, region }) => {
-    const storageKey = `last_applied_date_${region}_${server.ip}_${server.ec2_name}`;
-    const [lastAppliedDate, setLastAppliedDate] = useState(() => {
-      return localStorage.getItem(storageKey) || '';
+    const keyPrefix = `${region}_${server.ip}_${server.ec2_name}`;
+
+    const [assetCustodian, setAssetCustodian] = useState(() => {
+      return localStorage.getItem(`asset_custodian_${keyPrefix}`) || '';
+    });
+    const [assetOwner, setAssetOwner] = useState(() => {
+      return localStorage.getItem(`asset_owner_${keyPrefix}`) || '';
+    });
+    const [riskOwner, setRiskOwner] = useState(() => {
+      return localStorage.getItem(`risk_owner_${keyPrefix}`) || '';
+    });
+    const [assetClassification, setAssetClassification] = useState(() => {
+      return localStorage.getItem(`asset_classification_${keyPrefix}`) || '';
+    });
+    const [dataClassification, setDataClassification] = useState(() => {
+      return localStorage.getItem(`data_classification_${keyPrefix}`) || '';
     });
 
-    const handleDateChange = (e) => {
-      const newDate = e.target.value;
-      setLastAppliedDate(newDate);
-      localStorage.setItem(storageKey, newDate);
+    const onTextChange = (setter, storageKey) => (e) => {
+      const v = e.target.value;
+      setter(v);
+  try { localStorage.setItem(storageKey, v); } catch { /* ignore */ }
     };
 
-    // Format date for display (e.g., "2025-11-03" to "Nov 3, 2025")
-    const formattedDate = lastAppliedDate ? new Date(lastAppliedDate).toLocaleDateString() : '';
+    const onSelectChange = (setter, storageKey) => (e) => {
+      const v = e.target.value;
+      setter(v);
+  try { localStorage.setItem(storageKey, v); } catch { /* ignore */ }
+    };
 
     return (
       <tr>
         <td>{server.ip}</td>
         <td>{server.ec2_name}</td>
-        <td>{server.edb_version}</td>
-        <td>{server.os_version}</td>
+
         <td>
-          <div className="date-cell">
-            <span className="date-display">
-              {formattedDate || 'Not set'}
-            </span>
-            <label className="calendar-label">
-              <button 
-                className="calendar-button" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  const dateInput = e.currentTarget.parentElement.querySelector('input[type="date"]');
-                  dateInput.showPicker();
-                }}
-                title="Select date"
-              >
-                📅
-              </button>
-              <input
-                type="date"
-                value={lastAppliedDate}
-                onChange={handleDateChange}
-                className="date-input"
-              />
-            </label>
-          </div>
+          <input
+            type="text"
+            value={assetCustodian}
+            onChange={onTextChange(setAssetCustodian, `asset_custodian_${keyPrefix}`)}
+            placeholder="Asset Custodian"
+            className="small-input"
+          />
+        </td>
+
+        <td>
+          <input
+            type="text"
+            value={assetOwner}
+            onChange={onTextChange(setAssetOwner, `asset_owner_${keyPrefix}`)}
+            placeholder="Asset Owner"
+            className="small-input"
+          />
+        </td>
+
+        <td>
+          <input
+            type="text"
+            value={riskOwner}
+            onChange={onTextChange(setRiskOwner, `risk_owner_${keyPrefix}`)}
+            placeholder="Risk Owner"
+            className="small-input"
+          />
+        </td>
+
+        <td>
+          <select
+            value={assetClassification}
+            onChange={onSelectChange(setAssetClassification, `asset_classification_${keyPrefix}`)}
+            className="select-input"
+          >
+            <option value="">Select</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </td>
+
+        <td>
+          <select
+            value={dataClassification}
+            onChange={onSelectChange(setDataClassification, `data_classification_${keyPrefix}`)}
+            className="select-input"
+          >
+            <option value="">Select</option>
+            <option value="Confidential">Confidential</option>
+            <option value="Non-Confidential (Internal)">Non-Confidential (Internal)</option>
+          </select>
         </td>
       </tr>
     );
@@ -94,9 +137,11 @@ export default function AssetsInventory({ onBack }) {
         <tr>
           <th>IP</th>
           <th>EC2 Name</th>
-          <th>EDB Version</th>
-          <th>OS Version</th>
-          <th>Last applied date</th>
+          <th>Asset Custodian</th>
+          <th>Asset Owner</th>
+          <th>Risk Owner</th>
+          <th>Asset Classification</th>
+          <th>Data Classification</th>
         </tr>
       </thead>
       <tbody>
@@ -124,10 +169,9 @@ export default function AssetsInventory({ onBack }) {
           <table className="data-table">
             <thead>
               <tr>
-                <th style={{ width: '8%' }}>Region</th>
-                <th style={{ width: '13%' }}>AWS Account</th>
-                <th style={{ width: '79%' }}>Details</th>
-              </tr>
+                  <th style={{ width: '15%' }}>Region</th>
+                  <th style={{ width: '85%' }}>Details</th>
+                </tr>
             </thead>
             <tbody>
               {/* Map each expected region to a row */}
@@ -135,14 +179,13 @@ export default function AssetsInventory({ onBack }) {
                 const r = regionsData.find(d => (d.environment || '').toLowerCase() === regionName.toLowerCase());
                 return (
                   <tr key={regionName}>
-                    <td>{regionName}</td>
-                    <td>{r?.aws_account_id || 'Not configured'}</td>
-                    <td>
+                      <td>{regionName}</td>
+                      <td>
                       <div className="details-section">
                         {loading && <p>Loading data...</p>}
                         {error && <p style={{ color: 'var(--danger, #b00020)' }}>{error}</p>}
                         {!loading && !error && r?.servers ? (
-                          renderServersTable(r.servers, regionName)
+                            renderServersTable(r.servers, regionName)
                         ) : (
                           !loading && !r && <p>No data available for {regionName} region.</p>
                         )}
@@ -261,6 +304,15 @@ export default function AssetsInventory({ onBack }) {
             border: 1px solid var(--border-color, #ddd);
             border-radius: 4px;
             min-width: 130px;
+          }
+
+          .small-input,
+          .select-input {
+            padding: 6px 8px;
+            border: 1px solid var(--border-color, #ddd);
+            border-radius: 4px;
+            min-width: 160px;
+            background: white;
           }
         `}</style>
       </div>
