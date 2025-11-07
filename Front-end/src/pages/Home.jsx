@@ -8,8 +8,8 @@ export default function Home({ onGoTo }) {
       <p className="home-sub">Choose a section to continue</p>
       <div className="home-grid">
         <section className="home-card" onClick={() => onGoTo('assets')} role="button" tabIndex={0}>
-          <h2>Assets Library</h2>
-          <p>Browse and manage your AWS assets and metadata.</p>
+          <h2>EC2 Library</h2>
+          <p>Browse and manage your AWS ec2 details.</p>
           <button className="home-cta">Open Assets Library</button>
         </section>
 

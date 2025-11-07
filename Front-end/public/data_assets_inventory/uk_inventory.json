@@ -1,0 +1,42 @@
+{
+    "type": "assets_inventory",
+    "environment": "uk",
+    "servers": [
+        {
+            "ip": "172.21.193.138",
+            "asset_custodian": "",
+            "ec2_name": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification":"",
+            "data_classification":""
+        },
+        {
+            "ip": "172.21.195.109",
+            "asset_custodian": "",
+            "ec2_name": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification":"",
+            "data_classification":""
+        },
+        {
+            "ip": "172.21.193.113",
+            "asset_custodian": "",
+            "ec2_name": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification":"",
+            "data_classification":""
+        },
+        {
+            "ip": "172.29.65.200",
+            "asset_custodian": "",
+            "ec2_name": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification":"",
+            "data_classification":""
+        }
+    ]
+}
