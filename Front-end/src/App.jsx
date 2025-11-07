@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 import Home from './pages/Home';
-import AssetsLibrary from './pages/EC2_S3_DETAILS/AssetsLibrary';
+import AssetsLibrary from './pages/EC2_S3_Details/AssetsLibrary';
 import CostDashboard from './pages/COST_MANAGEMENT/CostDashboard';
 import AssetsInventory from './pages/ASSETS_INVENTORY/AssetsInventory';
 import EdbOsVersions from './pages/EDB_OS_VERSIONS/EdbOsVersions';
