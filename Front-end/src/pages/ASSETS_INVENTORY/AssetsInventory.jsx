@@ -17,22 +17,45 @@ export default function AssetsInventory({ onBack }) {
       'feed_os_edb.json',
     ];
 
-    Promise.all(files.map(f =>
-      fetch('/data_os_edb_versions/' + f).then(res => {
-        if (!res.ok) throw new Error(`${f} HTTP ${res.status}`);
-        return res.json();
-      })
-    ))
-      .then(results => {
-        // results is an array of region objects
-        setRegionsData(results || []);
+    // Helper function to fetch and merge data
+    const fetchAndMergeData = async () => {
+      try {
+        const mainResults = await Promise.all(files.map(f =>
+          fetch('/data_os_edb_versions/' + f).then(res => {
+            if (!res.ok) throw new Error(`${f} HTTP ${res.status}`);
+            return res.json();
+          })
+        ));
+
+        const foResults = await Promise.all(files.map(f =>
+          fetch('/data_os_edb_versions_fo/' + f).then(res => {
+            if (!res.ok) return null; // If file doesn't exist in _fo, skip it
+            return res.json();
+          }).catch(() => null) // Handle 404s gracefully
+        ));
+
+        // Merge the results
+        const mergedResults = mainResults.map((mainData, index) => {
+          const foData = foResults[index];
+          if (!foData) return mainData;
+
+          return {
+            ...mainData,
+            servers: [...mainData.servers, ...foData.servers]
+          };
+        });
+
+        setRegionsData(mergedResults || []);
         setError(null);
-      })
-      .catch(err => {
+      } catch (err) {
         setError('Failed to load region data');
         console.error('Error loading region JSONs:', err);
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAndMergeData();
   }, []);
 
   // Server row component with persistent fields (stored in localStorage)
