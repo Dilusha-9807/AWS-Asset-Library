@@ -3,7 +3,7 @@
     "TagFilter": {
         "WorkloadType": "database-server"
     },
-    "Timestamp": "2025-10-27 11:49:40.941871",
+    "Timestamp": "2025-11-10 11:19:50.101020",
     "Resources": {
         "EC2": [
             {
@@ -219,14 +219,6 @@
                         "Encrypted": false
                     },
                     {
-                        "VolumeId": "vol-07ff989176d58f783",
-                        "SizeGiB": 2400,
-                        "VolumeType": "io2",
-                        "IOPS": 7500,
-                        "Throughput": null,
-                        "Encrypted": false
-                    },
-                    {
                         "VolumeId": "vol-0a483d551a7892147",
                         "SizeGiB": 1700,
                         "VolumeType": "gp3",
@@ -249,6 +241,14 @@
                         "IOPS": 7500,
                         "Throughput": null,
                         "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0b96559a9e3d8aebf",
+                        "SizeGiB": 2800,
+                        "VolumeType": "io2",
+                        "IOPS": 7500,
+                        "Throughput": null,
+                        "Encrypted": true
                     }
                 ]
             },
@@ -323,6 +323,60 @@
             {
                 "ResourceType": "EC2",
                 "Region": "eu-west-1",
+                "InstanceId": "i-04600d2c3af0108c9",
+                "Name": "EC2-IR-DIFC-PROD-TRADE-BOOMS_DB-PRIMARY-AZ2 - ROCKY",
+                "InstanceType": "r6i.8xlarge",
+                "State": "running",
+                "AvailabilityZone": "eu-west-1b",
+                "LaunchTime": "2025-11-03 06:43:43+00:00",
+                "PrivateIP": "172.23.125.11",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-03feaeb56fe1d2fcf",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0ba7fadf0e717e982",
+                        "SizeGiB": 2400,
+                        "VolumeType": "io2",
+                        "IOPS": 7500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06063fa0552c7af4a",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 7500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-002c9982af134df18",
+                        "SizeGiB": 1700,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-06266188ee370269d",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "eu-west-1",
                 "InstanceId": "i-08b954f188969b366",
                 "Name": "EC2-IR-DIFC-PROD-TRADE-BOOMS_DB-SECONDARY-ROCKY",
                 "InstanceType": "r6i.16xlarge",
@@ -338,14 +392,6 @@
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
-                        "Encrypted": false
-                    },
-                    {
-                        "VolumeId": "vol-06a62c64c94058817",
-                        "SizeGiB": 2400,
-                        "VolumeType": "io2",
-                        "IOPS": 7500,
-                        "Throughput": null,
                         "Encrypted": false
                     },
                     {
@@ -371,6 +417,14 @@
                         "IOPS": 7500,
                         "Throughput": null,
                         "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0d6dc38e1ca8f209a",
+                        "SizeGiB": 2800,
+                        "VolumeType": "io2",
+                        "IOPS": 7500,
+                        "Throughput": null,
+                        "Encrypted": true
                     }
                 ]
             },
@@ -577,22 +631,54 @@
             {
                 "ResourceType": "EC2",
                 "Region": "eu-west-1",
-                "InstanceId": "i-0cf96fb1f74b6d815",
-                "Name": "EC2-IR-DIFC-PROD-TRADE-BOOMS_DB-PRIMARY-ROCKY-TMP",
-                "InstanceType": "i3en.2xlarge",
+                "InstanceId": "i-0ba57b2154fdcfbc3",
+                "Name": "EC2-IR-DIFC-PROD-TRADE-FOOMS_DB-PRIMARY-AZ2 - ROCKY",
+                "InstanceType": "r6i.8xlarge",
                 "State": "running",
-                "AvailabilityZone": "eu-west-1a",
-                "LaunchTime": "2025-10-22 08:04:30+00:00",
-                "PrivateIP": "172.23.124.44",
+                "AvailabilityZone": "eu-west-1b",
+                "LaunchTime": "2025-11-03 06:20:32+00:00",
+                "PrivateIP": "172.23.125.10",
                 "PublicIP": null,
                 "Volumes": [
                     {
-                        "VolumeId": "vol-01452e86b93b052ee",
+                        "VolumeId": "vol-0dff120e9ec424206",
                         "SizeGiB": 30,
                         "VolumeType": "gp3",
                         "IOPS": 3000,
                         "Throughput": 125,
                         "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0cc024849d4c7c667",
+                        "SizeGiB": 100,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-08acb83881665d476",
+                        "SizeGiB": 64,
+                        "VolumeType": "io2",
+                        "IOPS": 7500,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-01211a9a0e9665ddc",
+                        "SizeGiB": 450,
+                        "VolumeType": "io2",
+                        "IOPS": 6000,
+                        "Throughput": null,
+                        "Encrypted": true
+                    },
+                    {
+                        "VolumeId": "vol-0e5542a51fdd87139",
+                        "SizeGiB": 600,
+                        "VolumeType": "gp3",
+                        "IOPS": 3500,
+                        "Throughput": 200,
+                        "Encrypted": true
                     }
                 ]
             },
@@ -772,7 +858,7 @@
                     },
                     {
                         "VolumeId": "vol-06f7eefe598c4428d",
-                        "SizeGiB": 2400,
+                        "SizeGiB": 2800,
                         "VolumeType": "io2",
                         "IOPS": 7500,
                         "Throughput": null,
@@ -854,7 +940,7 @@
                 "ResourceType": "S3",
                 "Region": "eu-west-1",
                 "BucketName": "difc-arch-db-dump",
-                "CreationDate": "2025-08-05 11:46:38+00:00",
+                "CreationDate": "2025-11-06 09:28:30+00:00",
                 "Tags": {
                     "WorkloadType": "database-server"
                 }
@@ -863,7 +949,7 @@
                 "ResourceType": "S3",
                 "Region": "eu-west-2",
                 "BucketName": "difc-db-backup",
-                "CreationDate": "2025-08-05 11:47:15+00:00",
+                "CreationDate": "2025-11-07 07:56:21+00:00",
                 "Tags": {
                     "WorkloadType": "database-server"
                 }
@@ -872,7 +958,7 @@
                 "ResourceType": "S3",
                 "Region": "eu-west-1",
                 "BucketName": "difc-db-backup-ir",
-                "CreationDate": "2025-08-12 07:07:07+00:00",
+                "CreationDate": "2025-11-07 19:14:06+00:00",
                 "Tags": {
                     "WorkloadType": "database-server"
                 }

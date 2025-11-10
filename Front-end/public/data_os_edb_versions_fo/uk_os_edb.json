@@ -1,35 +1,40 @@
 {
     "type": "os_edb_versions_fo",
     "environment": "UK",
-    "aws_account_id": "656780772375",
+    "aws_account_id": "654654619251",
+    "timestamp": "2025-11-10 07:18:34.989775",
     "servers": [
         {
-            "ip": "172.21.193.138",
+            "ip": "172.21.225.48",
             "port": 5444,
-            "ec2_name": "ec2-nv-gtnt-prod-us-gtnamericas-bo-oms-db-1",
+            "region": "eu-west-2",
+            "ec2_name": "ec2-ldn-gtnt-prod-uk-gtneurope-fo-oms-db-01",
             "edb_version": "EnterpriseDB Advanced Server 15.12.0",
             "os_version": "Rocky Linux 9.5 (Blue Onyx)"
         },
         {
-            "ip": "172.21.195.109",
+            "ip": "172.21.225.143",
+            "port": 5444,
+            "region": "eu-west-2",
+            "ec2_name": "ec2-ldn-gtnt-prod-uk-gtneurope-fo-oms-db-02",
+            "edb_version": "EnterpriseDB Advanced Server 15.12.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        },
+        {
+            "ip": "172.23.145.188",
+            "port": 5444,
+            "region": "eu-west-1",
+            "ec2_name": "ec2-ir-gtnt-dr-uk-gtneurope-fo-oms-db-01",
+            "edb_version": "EnterpriseDB Advanced Server 15.12.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        },
+        {
+            "ip": "172.21.227.160",
             "port": 5445,
-            "ec2_name": "ec2-nv-gtnt-prod-us-gtnamericas-bo-oms-db-backup-server",
+            "region": "eu-west-2",
+            "ec2_name": "ec2-ldn-gtnt-prod-uk-gtneurope-fo-db-backup-server",
             "edb_version": "EnterpriseDB Advanced Server 15.12.0",
             "os_version": "Rocky Linux 9.5 (Blue Onyx)"
-        },
-        {
-            "ip": "172.21.193.113",
-            "port": 5444,
-            "ec2_name": "ec2-nv-gtnt-prod-us-gtnamericas-bo-oms-db-2",
-            "edb_version": "EnterpriseDB Advanced Server 15.12.0",
-            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
-        },
-        {
-            "ip": "172.29.65.200",
-            "port": 5444,
-            "ec2_name": "EC2 not found",
-            "edb_version": "EnterpriseDB Advanced Server 15.14.0",
-            "os_version": "Rocky Linux 9.6 (Blue Onyx)"
         }
     ]
 }

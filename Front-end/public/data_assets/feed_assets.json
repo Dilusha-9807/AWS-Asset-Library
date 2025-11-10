@@ -3,7 +3,7 @@
     "TagFilter": {
         "WorkloadType": "database-server"
     },
-    "Timestamp": "2025-10-27 12:15:44.110095",
+    "Timestamp": "2025-11-10 06:44:30.096624",
     "Resources": {
         "EC2": [
             {
@@ -262,7 +262,7 @@
                 "ResourceType": "EC2",
                 "Region": "ap-southeast-1",
                 "InstanceId": "i-0e2341ca0e3b25f4f",
-                "Name": "EC2-SG-GTNT-PROD-FEED-OHLC-DB-TEST",
+                "Name": "EC2-SG-GTNT-PROD-FEED-OHLC-DB",
                 "InstanceType": "r6a.xlarge",
                 "State": "running",
                 "AvailabilityZone": "ap-southeast-1a",

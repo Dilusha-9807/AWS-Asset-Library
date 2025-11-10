@@ -3,7 +3,7 @@
     "TagFilter": {
         "WorkloadType": "database-server"
     },
-    "Timestamp": "2025-10-27 11:59:53.487512",
+    "Timestamp": "2025-11-10 09:29:13.616647",
     "Resources": {
         "EC2": [
             {
@@ -178,7 +178,7 @@
                 "ResourceType": "EC2",
                 "Region": "us-east-1",
                 "InstanceId": "i-05703f941c340e5b3",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-db-1",
+                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-trade-db-1",
                 "InstanceType": "r6i.4xlarge",
                 "State": "running",
                 "AvailabilityZone": "us-east-1a",
@@ -224,7 +224,7 @@
                 "ResourceType": "EC2",
                 "Region": "us-east-1",
                 "InstanceId": "i-07d7d187e9e7d863b",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-db-2",
+                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-trade-db-2",
                 "InstanceType": "r6i.4xlarge",
                 "State": "running",
                 "AvailabilityZone": "us-east-1a",
@@ -346,7 +346,7 @@
                 "ResourceType": "EC2",
                 "Region": "us-east-1",
                 "InstanceId": "i-0075793e2b199f842",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-db-backup-server",
+                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-trade-db-backup-server",
                 "InstanceType": "i3.4xlarge",
                 "State": "running",
                 "AvailabilityZone": "us-east-1b",
@@ -438,7 +438,7 @@
                 "ResourceType": "EC2",
                 "Region": "us-east-1",
                 "InstanceId": "i-00a1a4d26229aba90",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-master-db",
+                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-master-symbol-db-01",
                 "InstanceType": "r6i.xlarge",
                 "State": "running",
                 "AvailabilityZone": "us-east-1a",
@@ -492,7 +492,7 @@
                 "ResourceType": "EC2",
                 "Region": "us-east-1",
                 "InstanceId": "i-0ee62a3b90e54453e",
-                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-symbol-db",
+                "Name": "ec2-nv-gtnt-prod-us-gtnamericas-fo-oms-master-symbol-db-02",
                 "InstanceType": "r6i.xlarge",
                 "State": "running",
                 "AvailabilityZone": "us-east-1a",
@@ -783,6 +783,36 @@
                         "IOPS": 3000,
                         "Throughput": 125,
                         "Encrypted": false
+                    }
+                ]
+            },
+            {
+                "ResourceType": "EC2",
+                "Region": "us-east-2",
+                "InstanceId": "i-089650d1845661e1c",
+                "Name": "ec2-oh-gtnt-dr-us-gtnamericas-fo-oms-master-symbol-dummy-db",
+                "InstanceType": "r6i.xlarge",
+                "State": "running",
+                "AvailabilityZone": "us-east-2a",
+                "LaunchTime": "2025-10-29 16:34:44+00:00",
+                "PrivateIP": "172.29.65.156",
+                "PublicIP": null,
+                "Volumes": [
+                    {
+                        "VolumeId": "vol-0726591d58a9a9475",
+                        "SizeGiB": 30,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": false
+                    },
+                    {
+                        "VolumeId": "vol-0094c783695568d0d",
+                        "SizeGiB": 50,
+                        "VolumeType": "gp3",
+                        "IOPS": 3000,
+                        "Throughput": 125,
+                        "Encrypted": true
                     }
                 ]
             }

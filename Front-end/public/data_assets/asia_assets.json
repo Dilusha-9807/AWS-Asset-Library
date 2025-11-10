@@ -3,7 +3,7 @@
     "TagFilter": {
         "WorkloadType": "database-server"
     },
-    "Timestamp": "2025-10-27 12:08:45.141217",
+    "Timestamp": "2025-11-10 06:20:33.157238",
     "Resources": {
         "EC2": [
             {
@@ -223,10 +223,10 @@
                 "Region": "ap-southeast-1",
                 "InstanceId": "i-08ab32c2d1ca442d5",
                 "Name": "ec2-sg-gtn-prod-at_booms_db_rocky-02",
-                "InstanceType": "r6i.4xlarge",
+                "InstanceType": "r8i.8xlarge",
                 "State": "running",
                 "AvailabilityZone": "ap-southeast-1a",
-                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "LaunchTime": "2025-11-08 11:53:35+00:00",
                 "PrivateIP": "172.20.191.8",
                 "PublicIP": null,
                 "Volumes": [
@@ -277,10 +277,10 @@
                 "Region": "ap-southeast-1",
                 "InstanceId": "i-0b1ada0ef523b158a",
                 "Name": "ec2-sg-gtn-prod-at_booms_db_rocky-01",
-                "InstanceType": "r6i.4xlarge",
+                "InstanceType": "r8i.8xlarge",
                 "State": "running",
                 "AvailabilityZone": "ap-southeast-1a",
-                "LaunchTime": "2025-05-10 11:46:10+00:00",
+                "LaunchTime": "2025-11-08 12:02:28+00:00",
                 "PrivateIP": "172.20.191.7",
                 "PublicIP": null,
                 "Volumes": [
@@ -707,10 +707,10 @@
                 "Region": "ap-southeast-1",
                 "InstanceId": "i-0af3b2688a64cd173",
                 "Name": "ec2-sg-gtn-dr-at_booms_db_rocky-03",
-                "InstanceType": "r6i.4xlarge",
+                "InstanceType": "r8i.8xlarge",
                 "State": "running",
                 "AvailabilityZone": "ap-southeast-1b",
-                "LaunchTime": "2025-05-10 12:06:47+00:00",
+                "LaunchTime": "2025-11-08 11:46:32+00:00",
                 "PrivateIP": "172.20.191.21",
                 "PublicIP": null,
                 "Volumes": [
@@ -1489,14 +1489,6 @@
                         "IOPS": 3500,
                         "Throughput": 125,
                         "Encrypted": true
-                    },
-                    {
-                        "VolumeId": "vol-0e78c8720d4a7abba",
-                        "SizeGiB": 16,
-                        "VolumeType": "io2",
-                        "IOPS": 3500,
-                        "Throughput": null,
-                        "Encrypted": true
                     }
                 ]
             },
@@ -1526,14 +1518,6 @@
                         "VolumeType": "gp3",
                         "IOPS": 3500,
                         "Throughput": 125,
-                        "Encrypted": true
-                    },
-                    {
-                        "VolumeId": "vol-0b08a1b48a547a9f9",
-                        "SizeGiB": 16,
-                        "VolumeType": "io2",
-                        "IOPS": 3500,
-                        "Throughput": null,
                         "Encrypted": true
                     }
                 ]
