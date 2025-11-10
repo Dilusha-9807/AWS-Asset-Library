@@ -62,19 +62,48 @@ export default function EdbOsVersions({ onBack }) {
 
   // Server row component to handle state per row
   const ServerRow = ({ server, region }) => {
-    const storageKey = `last_applied_date_${region}_${server.ip}_${server.ec2_name}`;
+    const baseKey = `${region}_${server.ip}_${server.ec2_name}`;
+    
+    // Initialize all states from localStorage
+    const [releaseDate, setReleaseDate] = useState(() => {
+      return localStorage.getItem(`release_date_${baseKey}`) || '2025-05-08';
+    });
     const [lastAppliedDate, setLastAppliedDate] = useState(() => {
-      return localStorage.getItem(storageKey) || '';
+      return localStorage.getItem(`last_applied_date_${baseKey}`) || '';
+    });
+    const [nextUpdate, setNextUpdate] = useState(() => {
+      return localStorage.getItem(`next_update_${baseKey}`) || '';
+    });
+    const [skip, setSkip] = useState(() => {
+      return localStorage.getItem(`skip_${baseKey}`) || 'No';
+    });
+    const [skipReason, setSkipReason] = useState(() => {
+      return localStorage.getItem(`skip_reason_${baseKey}`) || '';
+    });
+    const [upgradeHistory, setUpgradeHistory] = useState(() => {
+      return localStorage.getItem(`upgrade_history_${baseKey}`) || '';
+    });
+    const [upgradeNotes, setUpgradeNotes] = useState(() => {
+      return localStorage.getItem(`upgrade_notes_${baseKey}`) || '';
     });
 
-    const handleDateChange = (e) => {
+    // Generic handler for date changes
+    const handleDateChange = (setter, key) => (e) => {
       const newDate = e.target.value;
-      setLastAppliedDate(newDate);
-      localStorage.setItem(storageKey, newDate);
+      setter(newDate);
+      localStorage.setItem(key, newDate);
+    };
+
+    // Generic handler for text changes
+    const handleTextChange = (setter, key) => (e) => {
+      const value = e.target.value;
+      setter(value);
+      localStorage.setItem(key, value);
     };
 
     // Format date for display (e.g., "2025-11-03" to "Nov 3, 2025")
     const formattedDate = lastAppliedDate ? new Date(lastAppliedDate).toLocaleDateString() : '';
+    const formattedNextUpdate = nextUpdate ? new Date(nextUpdate).toLocaleDateString() : '';
 
     return (
       <tr>
@@ -82,6 +111,32 @@ export default function EdbOsVersions({ onBack }) {
         <td>{server.ec2_name}</td>
         <td>{server.edb_version}</td>
         <td>{server.os_version}</td>
+        <td>
+          <div className="date-cell">
+            <span className="date-display">
+              {releaseDate ? new Date(releaseDate).toLocaleDateString() : '5/8/2025'}
+            </span>
+            <label className="calendar-label">
+              <button 
+                className="calendar-button" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  const dateInput = e.currentTarget.parentElement.querySelector('input[type="date"]');
+                  dateInput.showPicker();
+                }}
+                title="Select date"
+              >
+                📅
+              </button>
+              <input
+                type="date"
+                value={releaseDate}
+                onChange={handleDateChange(setReleaseDate, `release_date_${baseKey}`)}
+                className="date-input"
+              />
+            </label>
+          </div>
+        </td>
         <td>
           <div className="date-cell">
             <span className="date-display">
@@ -102,11 +157,74 @@ export default function EdbOsVersions({ onBack }) {
               <input
                 type="date"
                 value={lastAppliedDate}
-                onChange={handleDateChange}
+                onChange={handleDateChange(setLastAppliedDate, `last_applied_date_${baseKey}`)}
                 className="date-input"
               />
             </label>
           </div>
+        </td>
+        <td>
+          <div className="date-cell">
+            <span className="date-display">
+              {formattedNextUpdate || 'Not set'}
+            </span>
+            <label className="calendar-label">
+              <button 
+                className="calendar-button" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  const dateInput = e.currentTarget.parentElement.querySelector('input[type="date"]');
+                  dateInput.showPicker();
+                }}
+                title="Select date"
+              >
+                📅
+              </button>
+              <input
+                type="date"
+                value={nextUpdate}
+                onChange={handleDateChange(setNextUpdate, `next_update_${baseKey}`)}
+                className="date-input"
+              />
+            </label>
+          </div>
+        </td>
+        <td>
+          <select 
+            value={skip}
+            onChange={handleTextChange(setSkip, `skip_${baseKey}`)}
+            className="small-input"
+          >
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </td>
+        <td>
+          <textarea
+            value={skipReason}
+            onChange={handleTextChange(setSkipReason, `skip_reason_${baseKey}`)}
+            placeholder="Reason for skip"
+            className="small-input"
+            rows="2"
+          />
+        </td>
+        <td>
+          <textarea
+            value={upgradeHistory}
+            onChange={handleTextChange(setUpgradeHistory, `upgrade_history_${baseKey}`)}
+            placeholder="Enter upgrade history"
+            className="small-input"
+            rows="2"
+          />
+        </td>
+        <td>
+          <textarea
+            value={upgradeNotes}
+            onChange={handleTextChange(setUpgradeNotes, `upgrade_notes_${baseKey}`)}
+            placeholder="Enter upgrade notes"
+            className="small-input"
+            rows="2"
+          />
         </td>
       </tr>
     );
@@ -121,7 +239,13 @@ export default function EdbOsVersions({ onBack }) {
           <th>EC2 Name</th>
           <th>EDB Version</th>
           <th>OS Version</th>
-          <th>Last applied date</th>
+          <th>Release Date</th>
+          <th>Last Applied Date</th>
+          <th>Next Update</th>
+          <th>Skip</th>
+          <th>Reason For Skip</th>
+          <th>Upgrade History</th>
+          <th>Upgrade Notes</th>
         </tr>
       </thead>
       <tbody>
@@ -196,6 +320,35 @@ export default function EdbOsVersions({ onBack }) {
             padding: 0.75rem;
             text-align: left;
             border: 1px solid var(--border-color, #ddd);
+          }
+
+          .small-input {
+            width: 100%;
+            padding: 4px 8px;
+            border: 1px solid var(--border-color, #ddd);
+            border-radius: 4px;
+            font-size: 0.9em;
+          }
+
+          textarea.small-input {
+            resize: vertical;
+            min-height: 60px;
+          }
+
+          select.small-input {
+            background-color: white;
+            height: 28px;
+          }
+
+          .nested-table th,
+          .nested-table td {
+            min-width: 120px;
+            max-width: 200px;
+          }
+
+          .nested-table td textarea,
+          .nested-table td input[type="text"] {
+            width: calc(100% - 16px);
           }
           
           .expand-btn {
