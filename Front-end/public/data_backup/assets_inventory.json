@@ -1,0 +1,165 @@
+{
+    "type": "assets_inventory_backup",
+    "servers": [
+        {
+            "ip": "172.23.124.36",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "High",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.23.124.40",
+            "asset_custodian": "Test",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "Medium",
+            "data_classification": "Confidential"
+        },
+        {
+            "ip": "172.23.140.168",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.23.125.36",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.191.7",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.191.8",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.191.21",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.191.9",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.21.225.86",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.21.225.56",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.23.145.207",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.21.227.27",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.21.193.138",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.21.193.113",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.29.65.200",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.21.195.109",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.183.113",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.183.117",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.183.137",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.183.120",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        }
+    ]
+}

@@ -10,6 +10,10 @@ export default defineConfig({
         target: 'http://localhost:5153',
         changeOrigin: true,
       },
+      '/api/assets-inventory-backup': {
+        target: 'http://localhost:5154',
+        changeOrigin: true,
+      },
     },
   },
 })

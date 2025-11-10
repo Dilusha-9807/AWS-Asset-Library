@@ -5,6 +5,8 @@ export default function AssetsInventory({ onBack }) {
   const [regionsData, setRegionsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [persistedMap, setPersistedMap] = useState({});
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   // Fetch all region JSON files on mount
   useEffect(() => {
@@ -58,36 +60,147 @@ export default function AssetsInventory({ onBack }) {
     fetchAndMergeData();
   }, []);
 
-  // Server row component with persistent fields (stored in localStorage)
-  const ServerRow = ({ server, region }) => {
-    const keyPrefix = `${region}_${server.ip}_${server.ec2_name}`;
+  // Load persisted values from backup JSON file via backend API
+  useEffect(() => {
+    let mounted = true;
+    async function loadPersisted() {
+      try {
+        // Use backend API to get data from JSON file
+        const res = await fetch('/api/assets-inventory-backup');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const ipMap = await res.json();
+        
+        if (mounted) setPersistedMap(ipMap || {});
+      } catch (e) {
+        console.warn('Failed to load persisted Assets Inventory values from backup API:', e);
+        // Fallback: try loading directly from JSON file
+        try {
+          const res = await fetch('/data_backup/assets_inventory.json');
+          if (res.ok) {
+            const json = await res.json();
+            const ipMap = {};
+            if (json && Array.isArray(json.servers)) {
+              json.servers.forEach(server => {
+                if (server && server.ip) {
+                  const ipKey = (server.ip || '').trim();
+                  ipMap[ipKey] = {
+                    asset_custodian: server.asset_custodian || '',
+                    asset_owner: server.asset_owner || '',
+                    risk_owner: server.risk_owner || '',
+                    asset_classification: server.asset_classification || '',
+                    data_classification: server.data_classification || '',
+                  };
+                }
+              });
+            }
+            if (mounted) setPersistedMap(ipMap);
+          }
+        } catch (fallbackError) {
+          console.warn('Fallback load also failed:', fallbackError);
+          if (mounted) setPersistedMap({});
+        }
+      }
+    }
+    loadPersisted();
+    return () => { mounted = false; };
+  }, []);
+
+  async function savePersisted(ip, values) {
+    try {
+      // Use backend API to update JSON file
+      const res = await fetch('/api/assets-inventory-backup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ip, values }),
+      });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+      
+      const result = await res.json();
+      if (result.ok) {
+        // Update local state to reflect saved changes
+        setPersistedMap(prev => ({
+          ...prev,
+          [ip]: {
+            ...(prev[ip] || {}),
+            ...values,
+          },
+        }));
+      } else {
+        throw new Error(result.error || 'Save failed');
+      }
+    } catch (e) {
+      console.warn('Failed to persist Assets Inventory values:', e);
+      throw e; // Re-throw so handleSave can catch it
+    }
+  }
+
+  // Server row component with persistent fields loaded from JSON
+  const ServerRow = ({ server, region, onShowSuccess }) => {
+    const ipKey = (server.ip || '').trim();
+    const initial = persistedMap[ipKey] || {};
 
     const [assetCustodian, setAssetCustodian] = useState(() => {
-      return localStorage.getItem(`asset_custodian_${keyPrefix}`) || '';
+      return initial.asset_custodian || '';
     });
     const [assetOwner, setAssetOwner] = useState(() => {
-      return localStorage.getItem(`asset_owner_${keyPrefix}`) || '';
+      return initial.asset_owner || '';
     });
     const [riskOwner, setRiskOwner] = useState(() => {
-      return localStorage.getItem(`risk_owner_${keyPrefix}`) || '';
+      return initial.risk_owner || '';
     });
     const [assetClassification, setAssetClassification] = useState(() => {
-      return localStorage.getItem(`asset_classification_${keyPrefix}`) || '';
+      return initial.asset_classification || '';
     });
     const [dataClassification, setDataClassification] = useState(() => {
-      return localStorage.getItem(`data_classification_${keyPrefix}`) || '';
+      return initial.data_classification || '';
     });
 
-    const onTextChange = (setter, storageKey) => (e) => {
+    // State to track if saving
+    const [isSaving, setIsSaving] = useState(false);
+    const [saveStatus, setSaveStatus] = useState(''); // 'success' or 'error'
+
+    // Generic handler for text changes (no auto-save)
+    const onTextChange = (setter) => (e) => {
       const v = e.target.value;
       setter(v);
-  try { localStorage.setItem(storageKey, v); } catch { /* ignore */ }
     };
 
-    const onSelectChange = (setter, storageKey) => (e) => {
+    // Generic handler for select changes (no auto-save)
+    const onSelectChange = (setter) => (e) => {
       const v = e.target.value;
       setter(v);
-  try { localStorage.setItem(storageKey, v); } catch { /* ignore */ }
+    };
+
+    // Save all fields for this row
+    const handleSave = async () => {
+      setIsSaving(true);
+      setSaveStatus('');
+      
+      const values = {
+        asset_custodian: assetCustodian,
+        asset_owner: assetOwner,
+        risk_owner: riskOwner,
+        asset_classification: assetClassification,
+        data_classification: dataClassification,
+      };
+
+      try {
+        await savePersisted(ipKey, values);
+        setSaveStatus('success');
+        // Show popup message
+        if (onShowSuccess) {
+          onShowSuccess();
+        }
+        setTimeout(() => setSaveStatus(''), 2000); // Clear status after 2 seconds
+      } catch (e) {
+        setSaveStatus('error');
+        setTimeout(() => setSaveStatus(''), 2000);
+      } finally {
+        setIsSaving(false);
+      }
     };
 
     return (
@@ -99,7 +212,7 @@ export default function AssetsInventory({ onBack }) {
           <input
             type="text"
             value={assetCustodian}
-            onChange={onTextChange(setAssetCustodian, `asset_custodian_${keyPrefix}`)}
+            onChange={onTextChange(setAssetCustodian)}
             placeholder="Asset Custodian"
             className="small-input"
           />
@@ -109,7 +222,7 @@ export default function AssetsInventory({ onBack }) {
           <input
             type="text"
             value={assetOwner}
-            onChange={onTextChange(setAssetOwner, `asset_owner_${keyPrefix}`)}
+            onChange={onTextChange(setAssetOwner)}
             placeholder="Asset Owner"
             className="small-input"
           />
@@ -119,7 +232,7 @@ export default function AssetsInventory({ onBack }) {
           <input
             type="text"
             value={riskOwner}
-            onChange={onTextChange(setRiskOwner, `risk_owner_${keyPrefix}`)}
+            onChange={onTextChange(setRiskOwner)}
             placeholder="Risk Owner"
             className="small-input"
           />
@@ -128,7 +241,7 @@ export default function AssetsInventory({ onBack }) {
         <td>
           <select
             value={assetClassification}
-            onChange={onSelectChange(setAssetClassification, `asset_classification_${keyPrefix}`)}
+            onChange={onSelectChange(setAssetClassification)}
             className="select-input"
           >
             <option value="">Select</option>
@@ -141,13 +254,23 @@ export default function AssetsInventory({ onBack }) {
         <td>
           <select
             value={dataClassification}
-            onChange={onSelectChange(setDataClassification, `data_classification_${keyPrefix}`)}
+            onChange={onSelectChange(setDataClassification)}
             className="select-input"
           >
             <option value="">Select</option>
             <option value="Confidential">Confidential</option>
             <option value="Non-Confidential (Internal)">Non-Confidential (Internal)</option>
           </select>
+        </td>
+        <td>
+          <button
+            onClick={handleSave}
+            disabled={isSaving}
+            className="save-btn"
+            title="Save changes for this row"
+          >
+            {isSaving ? 'Saving...' : saveStatus === 'success' ? '✓ Saved' : saveStatus === 'error' ? '✗ Error' : 'Save'}
+          </button>
         </td>
       </tr>
     );
@@ -165,6 +288,7 @@ export default function AssetsInventory({ onBack }) {
           <th>Risk Owner</th>
           <th>Asset Classification</th>
           <th>Data Classification</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -173,16 +297,37 @@ export default function AssetsInventory({ onBack }) {
             key={`${server.ip}-${server.ec2_name}`}
             server={server}
             region={region}
+            onShowSuccess={() => setShowSuccessPopup(true)}
           />
         ))}
       </tbody>
     </table>
   );
 
+  // Auto-hide success popup after 3 seconds
+  useEffect(() => {
+    if (showSuccessPopup) {
+      const timer = setTimeout(() => {
+        setShowSuccessPopup(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessPopup]);
+
   return (
     <div className="dashboard-container">
       <button className="back-btn" onClick={onBack}>← Back to list</button>
       <h1>Assets Inventory</h1>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <div className="success-popup-content">
+            <span className="success-icon">✓</span>
+            <span className="success-message">Changes saved</span>
+          </div>
+        </div>
+      )}
 
       <div className="content-section">
         {loading && <p>Loading data...</p>}
@@ -336,6 +481,74 @@ export default function AssetsInventory({ onBack }) {
             border-radius: 4px;
             min-width: 160px;
             background: white;
+          }
+
+          .save-btn {
+            padding: 6px 12px;
+            background-color: var(--primary-color, #0066cc);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: background-color 0.2s, opacity 0.2s;
+            min-width: 80px;
+          }
+
+          .save-btn:hover:not(:disabled) {
+            background-color: var(--primary-hover, #0052a3);
+          }
+
+          .save-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+
+          .save-btn:active:not(:disabled) {
+            transform: scale(0.98);
+          }
+
+          .success-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            animation: slideIn 0.3s ease-out;
+          }
+
+          @keyframes slideIn {
+            from {
+              transform: translateX(100%);
+              opacity: 0;
+            }
+            to {
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+
+          .success-popup-content {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+            font-weight: 500;
+            min-width: 180px;
+          }
+
+          .success-icon {
+            font-size: 1.2em;
+            font-weight: bold;
+          }
+
+          .success-message {
+            flex: 1;
           }
         `}</style>
       </div>
