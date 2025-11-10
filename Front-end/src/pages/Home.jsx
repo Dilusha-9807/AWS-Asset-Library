@@ -31,7 +31,7 @@ export default function Home({ onGoTo }) {
           <button className="home-cta">View Versions</button>
         </section>
 
-        <section className="home-card" onClick={() => onGoTo('backups')} role="button" tabIndex={0}>
+        <section className="home-card home-card-center" onClick={() => onGoTo('backups')} role="button" tabIndex={0}>
           <h2>Backup Logs</h2>
           <p>Review and monitor backup operation logs.</p>
           <button className="home-cta">View Backup Logs</button>

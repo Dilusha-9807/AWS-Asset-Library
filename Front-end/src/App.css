@@ -94,6 +94,11 @@ body {
   gap: 24px;
   align-items: stretch;
 }
+.home-card-center {
+  grid-column: 1 / -1;
+  max-width: 50%;
+  justify-self: center;
+}
 .home-card {
   background: linear-gradient(180deg, #ffffff, #f7f9ff);
   border-radius: 12px;
