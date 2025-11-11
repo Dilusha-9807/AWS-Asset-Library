@@ -57,6 +57,17 @@ body {
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  color: #213547;
+}
+
+/* Ensure all text elements have proper color */
+p, span, div, td, th, li, label {
+  color: inherit;
+}
+
+/* Ensure inputs and textareas have dark text */
+input, textarea, select {
+  color: #213547;
 }
 
 
@@ -216,6 +227,7 @@ body {
 .cost-table td {
   border-bottom: 1px solid #f0f0f0;
   font-size: 0.98rem;
+  color: #213547;
 }
 .cost-table tr:last-child td {
   border-bottom: none;
