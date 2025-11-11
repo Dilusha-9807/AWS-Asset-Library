@@ -123,13 +123,13 @@ export default function EdbOsVersions({ onBack }) {
       const result = await res.json();
       if (result.ok) {
         // Update local state to reflect saved changes
-        setPersistedMap(prev => ({
-          ...prev,
-          [ip]: {
-            ...(prev[ip] || {}),
-            ...values,
-          },
-        }));
+      setPersistedMap(prev => ({
+        ...prev,
+        [ip]: {
+          ...(prev[ip] || {}),
+          ...values,
+        },
+      }));
       } else {
         throw new Error(result.error || 'Save failed');
       }
@@ -466,7 +466,6 @@ export default function EdbOsVersions({ onBack }) {
             padding: 0.75rem;
             text-align: left;
             border: 1px solid var(--border-color, #ddd);
-            color: #213547;
           }
 
           .small-input {
@@ -475,8 +474,6 @@ export default function EdbOsVersions({ onBack }) {
             border: 1px solid var(--border-color, #ddd);
             border-radius: 4px;
             font-size: 0.9em;
-            color: #213547;
-            background-color: white;
           }
 
           textarea.small-input {
@@ -528,7 +525,6 @@ export default function EdbOsVersions({ onBack }) {
             padding: 0.5rem;
             border: 1px solid var(--border-color, #ddd);
             background: white;
-            color: #213547;
           }
           
           .nested-table th {

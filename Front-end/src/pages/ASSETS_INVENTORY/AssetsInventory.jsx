@@ -382,7 +382,6 @@ export default function AssetsInventory({ onBack }) {
             padding: 0.75rem;
             text-align: left;
             border: 1px solid var(--border-color, #ddd);
-            color: #213547;
           }
           
           .expand-btn {
@@ -413,7 +412,6 @@ export default function AssetsInventory({ onBack }) {
             padding: 0.5rem;
             border: 1px solid var(--border-color, #ddd);
             background: white;
-            color: #213547;
           }
           
           .nested-table th {
@@ -483,7 +481,6 @@ export default function AssetsInventory({ onBack }) {
             border-radius: 4px;
             min-width: 160px;
             background: white;
-            color: #213547;
           }
 
           .save-btn {
