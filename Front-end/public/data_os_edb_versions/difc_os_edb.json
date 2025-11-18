@@ -2,7 +2,7 @@
     "type": "os_edb_versions",
     "environment": "DIFC",
     "aws_account_id": "989277240808",
-    "timestamp": "2025-11-10 06:12:22.510815",
+    "timestamp": "2025-11-10 17:40:16.332274",
     "servers": [
         {
             "ip": "172.23.124.36",
@@ -35,6 +35,40 @@
             "ec2_name": "EC2-IR-DIFC-PROD-TRADE-BOOMS_DB-BACKUP-ROCKY",
             "edb_version": "EnterpriseDB Advanced Server 15.13.0",
             "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        },
+        {
+            "ip": "172.23.124.7",
+            "port": 5445,
+            "region": "eu-west-1",
+            "ec2_name": "EC2-IR-DIFC-PROD-TRADE-MONGO-DB-PRIMARY",
+            "edb_version": "Mongo 8.0.0",
+            "os_version": "Amazon Linux 2023"
+        },
+        {
+            "ip": "172.23.140.7",
+            "port": 5445,
+            "region": "eu-west-2",
+            "ec2_name": "EC2-LDN-DIFC-PROD-TRADE-MONGO-DB-01",
+            "edb_version": "Mongo 8.0.0",
+            "os_version": "Amazon Linux 2023"
+        },
+        {
+            "ip": "172.23.125.13",
+            "port": 5445,
+            "region": "eu-west-1",
+            "ec2_name": "EC2-IR-DIFC-PROD-TRADE-MONGO-DB-ARBITOR",
+            "edb_version": "Mongo 8.0.0",
+            "os_version": "Amazon Linux 2023"
+        },
+        {
+            "ip": "172.23.124.38",
+            "port": 5445,
+            "region": "eu-west-1",
+            "ec2_name": "EC2-IR-DIFC-PROD-HISTORY-DB-ROCKY",
+            "edb_version": "EnterpriseDB Advanced Server 15.13.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
         }
+
+
     ]
 }

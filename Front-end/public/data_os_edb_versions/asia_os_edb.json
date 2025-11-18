@@ -2,7 +2,7 @@
     "type": "os_edb_versions",
     "environment": "Asia",
     "aws_account_id": "028201095410",
-    "timestamp": "2025-11-10 06:18:24.234544",
+    "timestamp": "2025-11-11 04:57:04.147753",
     "servers": [
         {
             "ip": "172.20.191.7",
@@ -34,6 +34,38 @@
             "region": "ap-southeast-1",
             "ec2_name": "ec2-sg-gtn-prod-at_booms_db_backup_rocky-01",
             "edb_version": "EnterpriseDB Advanced Server 15.13.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        },
+        {
+            "ip": "172.20.191.11",
+            "port": 5445,
+            "region": "ap-southeast-1",
+            "ec2_name": "ec2-sg-gtn-prod-at_mongodb_aml3-01",
+            "edb_version": "Mongo 8.0.0",
+            "os_version": "Amazon Linux 2023"
+        },
+        {
+            "ip": "172.20.191.24",
+            "port": 5445,
+            "region": "ap-southeast-1",
+            "ec2_name": "ec2-sg-gtn-dr-at_mongodb_aml3-02",
+            "edb_version": "Mongo 8.0.0",
+            "os_version": "Amazon Linux 2023"
+        },
+        {
+            "ip": "172.20.191.36",
+            "port": 5445,
+            "region": "ap-southeast-1",
+            "ec2_name": "ec2-sg-gtn-dr-at_mongodb_aml3-arbiter-01",
+            "edb_version": "Mongo 8.0.0",
+            "os_version": "Amazon Linux 2023"
+        },
+        {
+            "ip": "172.20.191.4",
+            "port": 5445,
+            "region": "ap-southeast-1",
+            "ec2_name": "ec2-sg-gma-prod-at_booms_db-history-01",
+            "edb_version": "EnterpriseDB Advanced Server 15.12.0",
             "os_version": "Rocky Linux 9.5 (Blue Onyx)"
         }
     ]
