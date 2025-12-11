@@ -35,38 +35,6 @@
             "ec2_name": "EC2-SG-GTNT-PROD-FEED-BASE-BACKUP-NEW",
             "edb_version": "EnterpriseDB Advanced Server 15.12.0",
             "os_version": "Rocky Linux 9.5 (Blue Onyx)"
-        },
-        {
-            "ip": "172.20.178.114",
-            "port": 5432,
-            "region": "ap-southeast-1",
-            "ec2_name": "EC2-SG-GTNT-PROD-FEED-OHLC-DB",
-            "edb_version": "PostgreSQL 15.8",
-            "os_version": "Rocky Linux release 9.4 (Blue Onyx)"
-        },
-        {
-            "ip": "172.20.178.119",
-            "port": 5432,
-            "region": "ap-southeast-1",
-            "ec2_name": "EC2-SG-GTNT-PROD-FEED-STORE-DB",
-            "edb_version": "PostgreSQL 15.8",
-            "os_version": "Rocky Linux release 9.4 (Blue Onyx)"
-        },
-        {
-            "ip": "172.20.178.150",
-            "port": 5432,
-            "region": "ap-southeast-1",
-            "ec2_name": "EC2-SG-GTNT-PROD-FEED-RDS-ALERT-DB",
-            "edb_version": "PostgreSQL 16.4",
-            "os_version": "Rocky Linux release 9.4 (Blue Onyx)"
-        },
-        {
-            "ip": "172.20.178.232",
-            "port": 5432,
-            "region": "ap-southeast-1",
-            "ec2_name": "EC2-SG-GMA-PROD-FEED-DB-CPS",
-            "edb_version": "PostgreSQL 16.4",
-            "os_version": "Rocky Linux release 9.4 (Blue Onyx)"
         }
     ]
 }

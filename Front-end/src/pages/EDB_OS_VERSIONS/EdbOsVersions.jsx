@@ -8,6 +8,56 @@ export default function EdbOsVersions({ onBack }) {
   const [persistedMap, setPersistedMap] = useState({});
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
+  // Helpers for CSV export
+  const escapeCsv = (value) => {
+    const str = String(value ?? '');
+    return /[",\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
+  };
+
+  const downloadCsv = () => {
+    const rows = [];
+    (regionsData || []).forEach((region) => {
+      const env = region?.environment || '';
+      const account = region?.aws_account_id || '';
+      (region?.servers || []).forEach((server) => {
+        const ipKey = (server.ip || '').trim();
+        const persisted = persistedMap[ipKey] || {};
+        rows.push({
+          Region: env,
+          'AWS Account': account,
+          IP: server.ip || '',
+          'EC2 Name': server.ec2_name || '',
+          'EDB Version': server.edb_version || '',
+          'OS Version': server.os_version || '',
+          'Release Date': persisted.release_date || server.release_date || '',
+          'Last Applied Date': persisted.last_applied_date || server.last_applied_date || '',
+          'Next Update': persisted.next_update || server.next_update || '',
+          Skip: persisted.skip || server.skip || '',
+          'Reason For Skip': persisted.reason_for_skip || server.reason_for_skip || '',
+          'Upgrade History': persisted.upgrade_history || server.upgrade_history || '',
+          'Upgrade Notes': persisted.upgrade_notes || server.upgrade_notes || '',
+        });
+      });
+    });
+
+    if (!rows.length) return;
+
+    const headers = Object.keys(rows[0]);
+    const csvBody = [
+      headers.join(','),
+      ...rows.map((r) => headers.map((h) => escapeCsv(r[h])).join(',')),
+    ].join('\r\n');
+
+    // Add BOM for Excel compatibility
+    const blob = new Blob(['\uFEFF' + csvBody], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'edb_os_versions.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   // Fetch all region JSON files on mount
   useEffect(() => {
     setLoading(true);
@@ -17,6 +67,8 @@ export default function EdbOsVersions({ onBack }) {
       'asia_os_edb.json',
       'difc_os_edb.json',
       'feed_os_edb.json',
+      // New feed Postgres data (same FEED environment, will be merged below)
+      'feed_postgres_os_edb.json',
     ];
 
     // Helper function to fetch and merge data
@@ -47,7 +99,25 @@ export default function EdbOsVersions({ onBack }) {
           };
         });
 
-        setRegionsData(mergedResults || []);
+        // Consolidate entries that share the same environment (e.g., FEED and feed_postgres)
+        const consolidated = mergedResults.reduce((acc, cur) => {
+          if (!cur) return acc;
+          const env = (cur.environment || '').toLowerCase();
+          const existing = acc.find(
+            (item) => (item.environment || '').toLowerCase() === env
+          );
+          if (existing) {
+            existing.servers = [
+              ...(existing.servers || []),
+              ...(cur.servers || []),
+            ];
+          } else {
+            acc.push({ ...cur });
+          }
+          return acc;
+        }, []);
+
+        setRegionsData(consolidated || []);
         setError(null);
       } catch (err) {
         setError('Failed to load region data');
@@ -398,7 +468,18 @@ export default function EdbOsVersions({ onBack }) {
 
   return (
     <div className="dashboard-container">
-      <button className="back-btn" onClick={onBack}>← Back to list</button>
+      <div className="header-row">
+        <button className="back-btn" onClick={onBack}>← Back to list</button>
+        <div className="header-actions">
+          <button
+            className="download-btn"
+            title="Download table as CSV"
+            onClick={downloadCsv}
+          >
+            ⬇
+          </button>
+        </div>
+      </div>
       <h1>EDB & OS Versions</h1>
 
       {/* Success Popup */}
@@ -454,6 +535,31 @@ export default function EdbOsVersions({ onBack }) {
           .versions-table {
             margin-top: 1rem;
             overflow-x: auto;
+          }
+          .header-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: space-between;
+          }
+          .header-actions {
+            margin-left: auto;
+          }
+          .download-btn {
+            border: 1px solid var(--border-color, #ddd);
+            background: white;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: background-color 0.2s, transform 0.1s;
+          }
+          .download-btn:hover {
+            background: #f5f7fa;
+          }
+          .download-btn:active {
+            transform: scale(0.97);
           }
           
           .data-table {
