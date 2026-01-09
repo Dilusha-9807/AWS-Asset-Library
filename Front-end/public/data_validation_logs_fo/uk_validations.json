@@ -1,0 +1,19 @@
+{
+  "env": "uk-prod",
+  "type": "validation_logs",
+  "data": [
+    "Catcheck for FO on 2026-01-01 02:00:00",
+    "No inconsistencies found.",
+    "All tasks completed",
+    "",
+    "",
+    "Catcheck for FO on 2026-01-02 02:00:00",
+    "No inconsistencies found.",
+    "All tasks completed",
+    "",
+    "",
+    "Catcheck for FO on 2026-01-03 02:00:00",
+    "No inconsistencies found.",
+    "All tasks completed"
+  ]
+}

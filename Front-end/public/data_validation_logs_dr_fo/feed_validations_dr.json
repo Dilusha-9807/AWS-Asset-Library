@@ -1,0 +1,14 @@
+{
+  "env": "feed-prod",
+  "type": "validation_logs",
+  "data": [
+    "==================== DR LOGS FOR 2026-01-02 (FO) ========================",
+    "2026-01-02 04:00:00 - Starting FO DR validation for FEED backups",
+    "2026-01-02 04:10:12 - FO DR validation completed with 0 errors",
+    "2026-01-02 04:10:12 - ==========================================================================",
+    "==================== DR LOGS FOR 2026-01-03 (FO) ========================",
+    "2026-01-03 04:00:00 - Starting FO DR validation for FEED backups",
+    "2026-01-03 04:09:40 - FO DR validation completed with 0 errors",
+    "2026-01-03 04:09:40 - =========================================================================="
+  ]
+}

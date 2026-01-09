@@ -1,0 +1,25 @@
+{
+  "env": "feed-prod",
+  "type": "validation_logs",
+  "data": [
+    "Catcheck for BO on 2026-01-01 03:30:00",
+    "No inconsistencies found.",
+    "All tasks completed",
+    "",
+    "",
+    "Catcheck for BO on 2026-01-02 03:30:00",
+    "No inconsistencies found.",
+    "All tasks completed",
+    "",
+    "Catcheck for BO on 2025-11-27 04:00:01",
+      "Inconsistencies found. Waiting 10 minutes before retry...",
+      "Re-running pg_catcheck...",
+      "No inconsistencies after retry.",
+      "All tasks completed",
+      "",
+    "",
+    "Catcheck for BO on 2026-01-03 03:30:00",
+    "No inconsistencies found.",
+    "All tasks completed"
+  ]
+}
