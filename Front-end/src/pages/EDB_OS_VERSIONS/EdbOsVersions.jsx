@@ -88,14 +88,29 @@ export default function EdbOsVersions({ onBack }) {
           }).catch(() => null) // Handle 404s gracefully
         ));
 
-        // Merge the results
+        const foMsResults = await Promise.all(files.map(f =>
+          fetch('/data_os_edb_versions_fo_ms/' + f).then(res => {
+            if (!res.ok) return null; // If file doesn't exist in _fo_ms, skip it
+            return res.json();
+          }).catch(() => null) // Handle 404s gracefully
+        ));
+
+        // Merge the results from main, _fo, and _fo_ms
         const mergedResults = mainResults.map((mainData, index) => {
           const foData = foResults[index];
-          if (!foData) return mainData;
+          const foMsData = foMsResults[index];
+          
+          let servers = mainData.servers || [];
+          if (foData) {
+            servers = [...servers, ...foData.servers];
+          }
+          if (foMsData) {
+            servers = [...servers, ...foMsData.servers];
+          }
 
           return {
             ...mainData,
-            servers: [...mainData.servers, ...foData.servers]
+            servers: servers
           };
         });
 
