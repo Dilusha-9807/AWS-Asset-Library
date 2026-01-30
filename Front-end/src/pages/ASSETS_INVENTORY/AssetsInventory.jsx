@@ -60,6 +60,7 @@ export default function AssetsInventory({ onBack }) {
       'uk_os_edb.json',
       'asia_os_edb.json',
       'difc_os_edb.json',
+      'dwm_os_edb.json',
       'feed_os_edb.json',
       // Include Postgres feed data so Assets Inventory shows all FEED servers
       'feed_postgres_os_edb.json',
@@ -433,7 +434,7 @@ export default function AssetsInventory({ onBack }) {
             </thead>
             <tbody>
               {/* Map each expected region to a row */}
-              {['DIFC', 'FEED', 'ASIA', 'UK', 'US'].map(regionName => {
+              {['DIFC', 'FEED', 'ASIA', 'UK', 'US', 'DWM'].map(regionName => {
                 const r = regionsData.find(d => (d.environment || '').toLowerCase() === regionName.toLowerCase());
                 return (
                   <tr key={regionName}>

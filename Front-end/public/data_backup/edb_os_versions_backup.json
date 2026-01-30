@@ -700,6 +700,66 @@
             "reason_for_skip": "",
             "upgrade_history": "",
             "upgrade_notes": ""
+        },
+        {
+            "ip": "10.45.8.9",
+            "release_date": "",
+            "last_applied_date": "",
+            "next_update": "",
+            "skip": "",
+            "reason_for_skip": "",
+            "upgrade_history": "",
+            "upgrade_notes": ""
+        },
+        {
+            "ip": "10.45.10.132",
+            "release_date": "",
+            "last_applied_date": "",
+            "next_update": "",
+            "skip": "",
+            "reason_for_skip": "",
+            "upgrade_history": "",
+            "upgrade_notes": ""
+        },
+        {
+            "ip": "10.45.8.191",
+            "release_date": "",
+            "last_applied_date": "",
+            "next_update": "",
+            "skip": "",
+            "reason_for_skip": "",
+            "upgrade_history": "",
+            "upgrade_notes": ""
+        },
+        {
+            "ip": "172.20.56.40",
+            "release_date": "",
+            "last_applied_date": "",
+            "next_update": "",
+            "skip": "",
+            "reason_for_skip": "",
+            "upgrade_history": "",
+            "upgrade_notes": ""
+        },
+        {
+            "ip": "172.20.57.104",
+            "release_date": "",
+            "last_applied_date": "",
+            "next_update": "",
+            "skip": "",
+            "reason_for_skip": "",
+            "upgrade_history": "",
+            "upgrade_notes": ""
+        },
+        {
+            "ip": "172.20.56.163",
+            "release_date": "",
+            "last_applied_date": "",
+            "next_update": "",
+            "skip": "",
+            "reason_for_skip": "",
+            "upgrade_history": "",
+            "upgrade_notes": ""
         }
     ]
 }

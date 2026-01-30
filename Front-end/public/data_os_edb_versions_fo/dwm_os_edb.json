@@ -1,0 +1,32 @@
+{
+    "type": "os_edb_versions_fo",
+    "environment": "DWM",
+    "aws_account_id": "184647028224",
+    "timestamp": "2025-01-29 04:57:04.147753",
+    "servers": [
+        {
+            "ip": "172.20.56.40",
+            "port": 5444,
+            "region": "us-east-1",
+            "ec2_name": "ec2-nv-prod-gtni-amt-db",
+            "edb_version": "EnterpriseDB Advanced Server 15.13.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        },
+        {
+            "ip": "172.20.57.104",
+            "port": 5444,
+            "region": "us-east-1",
+            "ec2_name": "ec2-nv-prod-gtni-amt-db-ro",
+            "edb_version": "EnterpriseDB Advanced Server 15.13.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        },
+        {
+            "ip": "172.20.56.163",
+            "port": 5445,
+            "region": "us-east-1",
+            "ec2_name": "ec2-bv-prod-gtni-amt-db-backup",
+            "edb_version": "EnterpriseDB Advanced Server 15.13.0",
+            "os_version": "Rocky Linux 9.5 (Blue Onyx)"
+        }
+    ]
+}

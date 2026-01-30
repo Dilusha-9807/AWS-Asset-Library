@@ -560,6 +560,54 @@
             "risk_owner": "Arjuna Nanayakkara",
             "asset_classification": "",
             "data_classification": ""
+        },
+        {
+            "ip": "10.45.8.9",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "10.45.10.132",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "10.45.8.191",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.56.40",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.57.104",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.56.163",
+            "asset_custodian": "",
+            "asset_owner": "",
+            "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
         }
     ]
 }

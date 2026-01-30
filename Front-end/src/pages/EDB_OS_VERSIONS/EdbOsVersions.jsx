@@ -66,6 +66,7 @@ export default function EdbOsVersions({ onBack }) {
       'uk_os_edb.json',
       'asia_os_edb.json',
       'difc_os_edb.json',
+      'dwm_os_edb.json',
       'feed_os_edb.json',
       // New feed Postgres data (same FEED environment, will be merged below)
       'feed_postgres_os_edb.json',
@@ -522,7 +523,7 @@ export default function EdbOsVersions({ onBack }) {
             </thead>
             <tbody>
               {/* Map each expected region to a row */}
-              {['DIFC', 'FEED', 'ASIA', 'UK', 'US'].map(regionName => {
+              {['DIFC', 'FEED', 'ASIA', 'UK', 'US', 'DWM'].map(regionName => {
                 const r = regionsData.find(d => (d.environment || '').toLowerCase() === regionName.toLowerCase());
                 return (
                   <tr key={regionName}>
