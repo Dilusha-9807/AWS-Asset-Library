@@ -5,6 +5,7 @@ const mapping = {
   'DIFC PROD': '/data_assets/difc_assets.json',
   'ASIA PROD': '/data_assets/asia_assets.json',
   'FEED PROD': '/data_assets/feed_assets.json',
+  'HK PROD': '/data_assets/hk_assets.json',
   'UK PROD': '/data_assets/uk_assets.json',
   'US PROD': '/data_assets/us_assets.json',
 };

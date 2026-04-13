@@ -11,12 +11,16 @@ app = Flask(__name__)
 # ---------------------------------------
 SAVE_PATH_ASSETS = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_assets"
 SAVE_PATH_COST = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data"
+SAVE_PATH_COST_MON = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_monthly_cost"
 SAVE_PATH_OS_EDB = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_os_edb_versions"
 SAVE_PATH_OS_EDB_FO = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_os_edb_versions_fo"
+SAVE_PATH_OS_EDB_FO_MS = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_os_edb_versions_fo_ms"
 SAVE_PATH_VALIDATION_LOGS = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_validation_logs"
 SAVE_PATH_VALIDATION_LOGS_FO = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_validation_logs_fo"
+SAVE_PATH_VALIDATION_LOGS_FO_MS = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_validation_logs_fo_ms"
 SAVE_PATH_VALIDATION_LOGS_DR = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_validation_logs_dr"
 SAVE_PATH_VALIDATION_LOGS_DR_FO = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_validation_logs_dr_fo"
+SAVE_PATH_VALIDATION_LOGS_DR_FO_MS = "/works/d_dilusha/app_assets_lib/AWS-Asset-Library/Front-end/public/data_validation_logs_dr_fo_ms"
 
 # Map sender IP → file name
 ASSETS_FILE_MAP = {
@@ -37,6 +41,15 @@ COST_FILE_MAP = {
     "10.46.10.10": "hk_cost.json"
 }
 
+COST_MONTHLY_FILE_MAP = {
+    "172.21.195.109": "us_cost_monthly.json",
+    "172.21.227.27": "uk_cost_monthly.json",
+    "172.23.125.36": "difc_cost_monthly.json",
+    "172.20.191.9": "asia_cost_monthly.json",
+    "172.20.183.120": "feed_cost_monthly.json",
+    "10.46.10.10": "hk_cost_monthly.json"
+}
+
 EDB_OS_FILE_MAP = {
     "172.21.195.109": "us_os_edb.json",
     "172.21.227.27": "uk_os_edb.json",
@@ -52,43 +65,60 @@ EDB_OS_FO_FILE_MAP = {
     "172.23.125.37": "difc_os_edb.json",
     "172.20.191.10": "asia_os_edb.json",
     "172.20.166.120": "feed_os_edb.json",
-    "10.46.10.5": "hk_os_edb.json"  
+    "10.46.10.5": "hk_os_edb.json"
+}
+
+EDB_OS_FO_MS_FILE_MAP = {
+    "172.21.195.8": "us_os_edb.json",
+    "10.46.10.4": "hk_os_edb.json"
 }
 
 VALIDATION_LOGS_FILE_MAP = {
-    "172.21.195.109": "us_validation_logs.json",
-    "172.21.227.27": "uk_validation_logs.json",
-    "172.23.125.36": "difc_validation_logs.json",
-    "172.20.191.9": "asia_validation_logs.json",
-    "172.20.183.120": "feed_validation_logs.json",
-    "10.46.10.10": "hk_validation_logs.json"
+    "172.21.195.109": "us_validations.json",
+    "172.21.227.27": "uk_validations.json",
+    "172.23.125.36": "difc_validations.json",
+    "172.20.191.9": "asia_validations.json",
+    "172.20.183.120": "feed_validations.json",
+    "10.46.10.10": "hk_validations.json"
 }
 
 VALIDATION_LOGS_FO_FILE_MAP = {
-    "172.21.195.200": "us_validation_logs_fo.json",
-    "172.21.227.160": "uk_validation_logs_fo.json",
-    "172.23.125.37": "difc_validation_logs_fo.json",
-    "172.20.191.10": "asia_validation_logs_fo.json",
-    "172.20.166.120": "feed_validation_logs_fo.json",
-    "10.46.10.5": "hk_validation_logs_fo.json"
+    "172.21.195.200": "us_validations.json",
+    "172.21.227.160": "uk_validations.json",
+    "172.23.125.37": "difc_validations.json",
+    "172.20.191.10": "asia_validations.json",
+    "172.20.166.120": "feed_validations.json",
+    "10.46.10.5": "hk_validations.json"
+}
+
+VALIDATION_LOGS_FO_MS_FILE_MAP = {
+    "172.21.195.8": "us_validations.json",
+    "10.46.10.4": "hk_validations.json"
 }
 
 VALIDATION_LOGS_DR_FILE_MAP = {
-    "172.21.195.109": "us_validation_logs_dr.json",
-    "172.21.227.27": "uk_validation_logs_dr.json",
-    "172.23.125.36": "difc_validation_logs_dr.json",
-    "172.20.191.9": "asia_validation_logs_dr.json",
-    "172.20.183.120": "feed_validation_logs_dr.json",
-    "10.46.10.10": "hk_validation_logs_dr.json"
+    "172.21.195.109": "us_validations_dr.json",
+    "172.21.227.27": "uk_validations_dr.json",
+    "172.23.125.36": "difc_validations_dr.json",
+    "172.20.191.9": "asia_validations_dr.json",
+    "172.20.183.120": "feed_validations_dr.json",
+    "10.46.10.10": "hk_validations_dr.json"
 }
+
 VALIDATION_LOGS_DR_FO_FILE_MAP = {
 
-    "172.21.195.200": "us_validation_logs_dr_fo.json",
-    "172.21.227.160": "uk_validation_logs_dr_fo.json",
-    "172.23.125.37": "difc_validation_logs_dr_fo.json",
-    "172.20.191.10": "asia_validation_logs_dr_fo.json",
-    "172.20.166.120": "feed_validation_logs_dr_fo.json",
-    "10.46.10.5": "hk_validation_logs_dr_fo.json"
+    "172.21.195.200": "us_validations_dr.json",
+    "172.21.227.160": "uk_validations_dr.json",
+    "172.23.125.37": "difc_validations_dr.json",
+    "172.20.191.10": "asia_validations_dr.json",
+    "172.20.166.120": "feed_validations_dr.json",
+    "10.46.10.5": "hk_validations_dr.json"
+}
+
+VALIDATION_LOGS_DR_FO_MS_FILE_MAP = {
+
+    "172.21.195.8": "us_validations_dr.json",
+    "10.46.10.4": "hk_validations_dr.json"
 }
 
 # ---------------------------------------
@@ -127,24 +157,36 @@ def upload_json():
     elif json_type == "cost":
         file_map = COST_FILE_MAP
         save_path = SAVE_PATH_COST
+    elif json_type == "monthly_cost":
+        file_map = COST_MONTHLY_FILE_MAP
+        save_path = SAVE_PATH_COST_MON
     elif json_type == "os_edb_versions":
         file_map = EDB_OS_FILE_MAP
         save_path = SAVE_PATH_OS_EDB
     elif json_type == "os_edb_versions_fo":
         file_map = EDB_OS_FO_FILE_MAP
         save_path = SAVE_PATH_OS_EDB_FO
+    elif json_type == "os_edb_versions_fo_ms":
+        file_map = EDB_OS_FO_MS_FILE_MAP
+        save_path = SAVE_PATH_OS_EDB_FO_MS
     elif json_type == "validation_logs":
         file_map = VALIDATION_LOGS_FILE_MAP
         save_path = SAVE_PATH_VALIDATION_LOGS
     elif json_type == "validation_logs_fo":
         file_map = VALIDATION_LOGS_FO_FILE_MAP
         save_path = SAVE_PATH_VALIDATION_LOGS_FO
+    elif json_type == "validation_logs_fo_ms":
+        file_map = VALIDATION_LOGS_FO_MS_FILE_MAP
+        save_path = SAVE_PATH_VALIDATION_LOGS_FO_MS
     elif json_type == "validation_logs_dr":
         file_map = VALIDATION_LOGS_DR_FILE_MAP
         save_path = SAVE_PATH_VALIDATION_LOGS_DR
     elif json_type == "validation_logs_dr_fo":
         file_map = VALIDATION_LOGS_DR_FO_FILE_MAP
         save_path = SAVE_PATH_VALIDATION_LOGS_DR_FO
+    elif json_type == "validation_logs_dr_fo_ms":
+        file_map = VALIDATION_LOGS_DR_FO_MS_FILE_MAP
+        save_path = SAVE_PATH_VALIDATION_LOGS_DR_FO_MS
     else:
         msg = f"Unknown JSON type '{json_type}' from {client_ip}"
         print(f"[{datetime.now()}] {msg}")
@@ -169,10 +211,17 @@ def upload_json():
 if __name__ == "__main__":
     os.makedirs(SAVE_PATH_ASSETS, exist_ok=True)
     os.makedirs(SAVE_PATH_COST, exist_ok=True)
+    os.makedirs(SAVE_PATH_COST_MON, exist_ok=True)
     os.makedirs(SAVE_PATH_OS_EDB, exist_ok=True)
     os.makedirs(SAVE_PATH_OS_EDB_FO, exist_ok=True)
+    os.makedirs(SAVE_PATH_OS_EDB_FO_MS, exist_ok=True)
+    os.makedirs(SAVE_PATH_VALIDATION_LOGS, exist_ok=True)
+    os.makedirs(SAVE_PATH_VALIDATION_LOGS_FO, exist_ok=True)
+    os.makedirs(SAVE_PATH_VALIDATION_LOGS_FO_MS, exist_ok=True)
+    os.makedirs(SAVE_PATH_VALIDATION_LOGS_DR, exist_ok=True)
+    os.makedirs(SAVE_PATH_VALIDATION_LOGS_DR_FO, exist_ok=True)
+    os.makedirs(SAVE_PATH_VALIDATION_LOGS_DR_FO_MS, exist_ok=True)
     print(f"JSON listener started on port 5152...")
     print(f"Assets path: {SAVE_PATH_ASSETS}")
     print(f"Cost path: {SAVE_PATH_COST}")
     app.run(host="0.0.0.0", port=5152)
-

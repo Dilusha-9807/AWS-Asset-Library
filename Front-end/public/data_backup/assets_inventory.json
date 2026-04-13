@@ -534,19 +534,35 @@
             "asset_custodian": "Gayan Thotamuna",
             "asset_owner": "Eranga Amarasinghe",
             "risk_owner": "Arjuna Nanayakkara",
-            "asset_classification": "",
-            "data_classification": ""
+            "asset_classification": "High",
+            "data_classification": "Confidential"
         },
         {
             "ip": "172.21.193.121",
             "asset_custodian": "Gayan Thotamuna",
             "asset_owner": "Eranga Amarasinghe",
             "risk_owner": "Arjuna Nanayakkara",
-            "asset_classification": "",
-            "data_classification": ""
+            "asset_classification": "High",
+            "data_classification": "Confidential"
         },
         {
             "ip": "172.29.65.10",
+            "asset_custodian": "Gayan Thotamuna",
+            "asset_owner": "Eranga Amarasinghe",
+            "risk_owner": "Arjuna Nanayakkara",
+            "asset_classification": "High",
+            "data_classification": "Confidential"
+        },
+        {
+            "ip": "172.21.195.8",
+            "asset_custodian": "Gayan Thotamuna",
+            "asset_owner": "Eranga Amarasinghe",
+            "risk_owner": "Arjuna Nanayakkara",
+            "asset_classification": "Medium",
+            "data_classification": "Confidential"
+        },
+        {
+            "ip": "172.23.124.42",
             "asset_custodian": "Gayan Thotamuna",
             "asset_owner": "Eranga Amarasinghe",
             "risk_owner": "Arjuna Nanayakkara",
@@ -554,7 +570,23 @@
             "data_classification": ""
         },
         {
-            "ip": "172.21.195.8",
+            "ip": "172.23.140.170",
+            "asset_custodian": "Gayan Thotamuna",
+            "asset_owner": "Eranga Amarasinghe",
+            "risk_owner": "Arjuna Nanayakkara",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.178.128",
+            "asset_custodian": "Gayan Thotamuna",
+            "asset_owner": "Eranga Amarasinghe",
+            "risk_owner": "Arjuna Nanayakkara",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.20.162.128",
             "asset_custodian": "Gayan Thotamuna",
             "asset_owner": "Eranga Amarasinghe",
             "risk_owner": "Arjuna Nanayakkara",
@@ -606,6 +638,22 @@
             "asset_custodian": "",
             "asset_owner": "",
             "risk_owner": "",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.23.124.43",
+            "asset_custodian": "Gayan Thotamuna",
+            "asset_owner": "Eranga Amarasinghe",
+            "risk_owner": "Arjuna Nanayakkara",
+            "asset_classification": "",
+            "data_classification": ""
+        },
+        {
+            "ip": "172.23.140.171",
+            "asset_custodian": "Gayan Thotamuna",
+            "asset_owner": "Eranga Amarasinghe",
+            "risk_owner": "Arjuna Nanayakkara",
             "asset_classification": "",
             "data_classification": ""
         }

@@ -5,6 +5,7 @@ const ENV_CONFIG = [
   { id: 'difc', label: 'DIFC' },
   { id: 'asia', label: 'ASIA' },
   { id: 'feed', label: 'FEED' },
+  { id: 'hk', label: 'HK' },
   { id: 'uk', label: 'UK' },
   { id: 'us', label: 'US' },
 ];

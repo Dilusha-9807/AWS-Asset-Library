@@ -1,0 +1,71 @@
+{
+  "type": "assets",
+  "TagFilter": {
+    "WorkloadType": "database-server"
+  },
+  "Timestamp": "2026-04-10 09:30:00",
+  "Resources": {
+    "EC2": [
+      {
+        "ResourceType": "EC2",
+        "Region": "ap-east-1",
+        "InstanceId": "i-0hkdb001example",
+        "Name": "ec2-hkg-gtnt-prod-hk-fo-db-01",
+        "InstanceType": "r6i.2xlarge",
+        "State": "running",
+        "AvailabilityZone": "ap-east-1a",
+        "LaunchTime": "2026-01-15 02:11:34+00:00",
+        "PrivateIP": "172.31.12.45",
+        "PublicIP": null,
+        "Volumes": [
+          {
+            "VolumeId": "vol-0hk01example",
+            "SizeGiB": 80,
+            "VolumeType": "gp3",
+            "IOPS": 3000,
+            "Throughput": 125,
+            "Encrypted": true
+          },
+          {
+            "VolumeId": "vol-0hk02example",
+            "SizeGiB": 200,
+            "VolumeType": "gp3",
+            "IOPS": 3500,
+            "Throughput": 200,
+            "Encrypted": true
+          }
+        ]
+      },
+      {
+        "ResourceType": "EC2",
+        "Region": "ap-east-1",
+        "InstanceId": "i-0hkdb002example",
+        "Name": "ec2-hkg-gtnt-prod-hk-bo-db-01",
+        "InstanceType": "r6i.2xlarge",
+        "State": "running",
+        "AvailabilityZone": "ap-east-1b",
+        "LaunchTime": "2026-02-03 08:22:10+00:00",
+        "PrivateIP": "172.31.18.92",
+        "PublicIP": null,
+        "Volumes": [
+          {
+            "VolumeId": "vol-0hk03example",
+            "SizeGiB": 80,
+            "VolumeType": "gp3",
+            "IOPS": 3000,
+            "Throughput": 125,
+            "Encrypted": true
+          },
+          {
+            "VolumeId": "vol-0hk04example",
+            "SizeGiB": 250,
+            "VolumeType": "gp3",
+            "IOPS": 3500,
+            "Throughput": 200,
+            "Encrypted": true
+          }
+        ]
+      }
+    ]
+  }
+}

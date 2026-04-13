@@ -1,0 +1,39 @@
+{
+  "account_name": "hk_prod",
+  "region": "ap-east-1",
+  "date_range": "2026-03-01 to 2026-03-31",
+  "services": [
+    {
+      "service": "Amazon Elastic Compute Cloud - Compute",
+      "cost_usd": 1248.73,
+      "details": [
+        {
+          "usage_type": "m6i.2xlarge",
+          "tag": "ApplicationName$db",
+          "amount_usd": 1021.4
+        },
+        {
+          "usage_type": "t3.large",
+          "tag": "ApplicationName$backup",
+          "amount_usd": 227.33
+        }
+      ]
+    },
+    {
+      "service": "Amazon Simple Storage Service",
+      "cost_usd": 186.52,
+      "details": [
+        {
+          "usage_type": "TimedStorage-ByteHrs",
+          "tag": "Environment$hk-prod",
+          "amount_usd": 140.18
+        },
+        {
+          "usage_type": "Requests-Tier1",
+          "tag": "Environment$hk-prod",
+          "amount_usd": 46.34
+        }
+      ]
+    }
+  ]
+}
