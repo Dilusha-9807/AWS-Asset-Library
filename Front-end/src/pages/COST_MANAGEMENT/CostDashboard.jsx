@@ -7,14 +7,15 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
+  BarElement,
   LineElement,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend);
 
 const accountFiles = [
   'asia_cost.json',
@@ -35,7 +36,9 @@ export default function CostDashboard({ onBack }) {
     accountName: '',
     loading: false,
     error: '',
-    chartData: null,
+    activeTab: 'daily',
+    dailyChartData: null,
+    monthlyChartData: null,
   });
 
   const closeGraphModal = () => {
@@ -44,7 +47,9 @@ export default function CostDashboard({ onBack }) {
       accountName: '',
       loading: false,
       error: '',
-      chartData: null,
+      activeTab: 'daily',
+      dailyChartData: null,
+      monthlyChartData: null,
     });
   };
 
@@ -55,7 +60,7 @@ export default function CostDashboard({ onBack }) {
     return env ? `${env}_cost.json` : null;
   };
 
-  const buildMonthlyChartData = (monthlyJson) => {
+  const buildDailyChartData = (monthlyJson) => {
     const byDate = new Map();
 
     const putPoint = (date, key, value) => {
@@ -120,6 +125,57 @@ export default function CostDashboard({ onBack }) {
     };
   };
 
+  const buildMonthlyChartData = (monthlyJson) => {
+    const byMonth = new Map();
+
+    const putPoint = (month, key, value) => {
+      if (!month) return;
+      const row = byMonth.get(month) || { ec2: 0, s3: 0 };
+      row[key] = Number(value || 0);
+      byMonth.set(month, row);
+    };
+
+    if (Array.isArray(monthlyJson?.services)) {
+      monthlyJson.services.forEach((svc) => {
+        const svcName = String(svc?.service || '').toLowerCase();
+        const isEc2 = svcName.includes('elastic compute cloud') || svcName.includes('ec2') || svcName.includes('compute');
+        const isS3 = svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage');
+        const targetKey = isEc2 ? 'ec2' : isS3 ? 's3' : null;
+        if (!targetKey) return;
+
+        (svc?.monthly_costs || []).forEach((d) => {
+          putPoint(d?.month, targetKey, d?.cost_usd);
+        });
+      });
+    }
+
+    const labels = Array.from(byMonth.keys());
+    const ec2Data = labels.map((d) => byMonth.get(d)?.ec2 ?? 0);
+    const s3Data = labels.map((d) => byMonth.get(d)?.s3 ?? 0);
+
+    if (labels.length === 0) return null;
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'EC2',
+          data: ec2Data,
+          backgroundColor: 'rgba(25,118,210,0.65)',
+          borderColor: '#1976d2',
+          borderWidth: 1,
+        },
+        {
+          label: 'S3',
+          data: s3Data,
+          backgroundColor: 'rgba(46,125,50,0.65)',
+          borderColor: '#2e7d32',
+          borderWidth: 1,
+        },
+      ],
+    };
+  };
+
   const handleOpenCostGraph = async (account) => {
     const monthlyFile = getMonthlyFileForAccount(account);
     setGraphModal({
@@ -127,7 +183,9 @@ export default function CostDashboard({ onBack }) {
       accountName: account?.account_name || 'Account',
       loading: true,
       error: '',
-      chartData: null,
+      activeTab: 'daily',
+      dailyChartData: null,
+      monthlyChartData: null,
     });
 
     if (!monthlyFile) {
@@ -145,14 +203,16 @@ export default function CostDashboard({ onBack }) {
         throw new Error(`Failed to load ${monthlyFile}: HTTP ${res.status}`);
       }
       const json = await res.json();
-      const chartData = buildMonthlyChartData(json);
-      if (!chartData) {
-        throw new Error('No EC2/S3 daily cost series found in monthly data file.');
+      const dailyChartData = buildDailyChartData(json);
+      const monthlyChartData = buildMonthlyChartData(json);
+      if (!dailyChartData && !monthlyChartData) {
+        throw new Error('No EC2/S3 cost series found in monthly data file.');
       }
       setGraphModal((prev) => ({
         ...prev,
         loading: false,
-        chartData,
+        dailyChartData,
+        monthlyChartData,
       }));
     } catch (e) {
       setGraphModal((prev) => ({
@@ -240,9 +300,12 @@ export default function CostDashboard({ onBack }) {
     return () => { mounted = false; };
   }, []);
 
-  const chartLabels = graphModal.chartData?.labels || [];
-  const ec2Series = graphModal.chartData?.datasets?.find((d) => d.label === 'EC2');
-  const s3Series = graphModal.chartData?.datasets?.find((d) => d.label === 'S3');
+  const dailyChartLabels = graphModal.dailyChartData?.labels || [];
+  const dailyEc2Series = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'EC2');
+  const dailyS3Series = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'S3');
+  const monthlyChartLabels = graphModal.monthlyChartData?.labels || [];
+  const monthlyEc2Series = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'EC2');
+  const monthlyS3Series = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'S3');
 
   if (loading) return <div className="dashboard-container">Loading AWS account cost data...</div>;
   if (error) return <div className="dashboard-container" style={{ color: 'red' }}>Error: {error}</div>;
@@ -310,19 +373,34 @@ export default function CostDashboard({ onBack }) {
       {graphModal.open && (
         <Modal onClose={closeGraphModal}>
           <h2 style={{ marginTop: 0, marginBottom: 8 }}>{graphModal.accountName} Cost Graph</h2>
-          <p style={{ marginTop: 0, color: '#666' }}>Daily EC2 and S3 cost trend</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 8, marginBottom: 12 }}>
+            <button
+              className="view-res-btn"
+              onClick={() => setGraphModal((prev) => ({ ...prev, activeTab: 'daily' }))}
+              style={{ opacity: graphModal.activeTab === 'daily' ? 1 : 0.65 }}
+            >
+              Daily Cost Data
+            </button>
+            <button
+              className="view-res-btn"
+              onClick={() => setGraphModal((prev) => ({ ...prev, activeTab: 'monthly' }))}
+              style={{ opacity: graphModal.activeTab === 'monthly' ? 1 : 0.65 }}
+            >
+              Monthly Cost Data
+            </button>
+          </div>
 
           {graphModal.loading && <p>Loading cost graph...</p>}
           {!graphModal.loading && graphModal.error && (
             <p style={{ color: 'var(--danger, #b00020)' }}>{graphModal.error}</p>
           )}
-          {!graphModal.loading && !graphModal.error && graphModal.chartData && ec2Series && s3Series && (
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && dailyEc2Series && dailyS3Series && (
             <div style={{ minWidth: 720, maxWidth: '100%', display: 'grid', gap: 16 }}>
               <div style={{ height: 260 }}>
                 <Line
                   data={{
-                    labels: chartLabels,
-                    datasets: [ec2Series],
+                    labels: dailyChartLabels,
+                    datasets: [dailyEc2Series],
                   }}
                   options={{
                     responsive: true,
@@ -360,8 +438,8 @@ export default function CostDashboard({ onBack }) {
               <div style={{ height: 260 }}>
                 <Line
                   data={{
-                    labels: chartLabels,
-                    datasets: [s3Series],
+                    labels: dailyChartLabels,
+                    datasets: [dailyS3Series],
                   }}
                   options={{
                     responsive: true,
@@ -397,8 +475,88 @@ export default function CostDashboard({ onBack }) {
               </div>
             </div>
           )}
-          {!graphModal.loading && !graphModal.error && graphModal.chartData && (!ec2Series || !s3Series) && (
-            <p style={{ color: 'var(--danger, #b00020)' }}>EC2/S3 series could not be rendered for this account.</p>
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && monthlyEc2Series && monthlyS3Series && (
+            <div style={{ minWidth: 720, maxWidth: '100%', display: 'grid', gap: 16 }}>
+              <div style={{ height: 260 }}>
+                <Bar
+                  data={{
+                    labels: monthlyChartLabels,
+                    datasets: [monthlyEc2Series],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: {
+                        callbacks: {
+                          label: function (context) {
+                            const val = Number(context.parsed?.y || 0);
+                            return `${context.dataset.label}: $${val.toFixed(2)}`;
+                          },
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Month' },
+                      },
+                      y: {
+                        title: { display: true, text: 'EC2 Monthly Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>
+
+              <div style={{ height: 260 }}>
+                <Bar
+                  data={{
+                    labels: monthlyChartLabels,
+                    datasets: [monthlyS3Series],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: {
+                        callbacks: {
+                          label: function (context) {
+                            const val = Number(context.parsed?.y || 0);
+                            return `${context.dataset.label}: $${val.toFixed(2)}`;
+                          },
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Month' },
+                      },
+                      y: {
+                        title: { display: true, text: 'S3 Monthly Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>
+            </div>
+          )}
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && (!monthlyEc2Series || !monthlyS3Series) && (
+            <p style={{ color: 'var(--danger, #b00020)' }}>Monthly EC2/S3 series could not be rendered for this account.</p>
+          )}
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && (!dailyEc2Series || !dailyS3Series) && (
+            <p style={{ color: 'var(--danger, #b00020)' }}>Daily EC2/S3 series could not be rendered for this account.</p>
           )}
         </Modal>
       )}

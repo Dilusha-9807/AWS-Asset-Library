@@ -42,12 +42,12 @@ COST_FILE_MAP = {
 }
 
 COST_MONTHLY_FILE_MAP = {
-    "172.21.195.109": "us_cost_monthly.json",
-    "172.21.227.27": "uk_cost_monthly.json",
-    "172.23.125.36": "difc_cost_monthly.json",
-    "172.20.191.9": "asia_cost_monthly.json",
-    "172.20.183.120": "feed_cost_monthly.json",
-    "10.46.10.10": "hk_cost_monthly.json"
+    "172.21.195.109": "us_cost.json",
+    "172.21.227.27": "uk_cost.json",
+    "172.23.125.36": "difc_cost.json",
+    "172.20.191.9": "asia_cost.json",
+    "172.20.183.120": "feed_cost.json",
+    "10.46.10.10": "hk_cost.json"
 }
 
 EDB_OS_FILE_MAP = {
