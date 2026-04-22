@@ -63,19 +63,30 @@ export default function CostDashboard({ onBack }) {
   const buildDailyChartData = (monthlyJson) => {
     const byDate = new Map();
 
+    const classifyService = (serviceName) => {
+      const svcName = String(serviceName || '').toLowerCase();
+      if (svcName.includes('ec2 - other') || (svcName.includes('ec2') && svcName.includes('other'))) {
+        return 'ec2Other';
+      }
+      if (svcName.includes('elastic compute cloud') || svcName.includes('ec2') || svcName.includes('compute')) {
+        return 'ec2';
+      }
+      if (svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage')) {
+        return 's3';
+      }
+      return null;
+    };
+
     const putPoint = (date, key, value) => {
       if (!date) return;
-      const row = byDate.get(date) || { ec2: 0, s3: 0 };
+      const row = byDate.get(date) || { ec2: 0, s3: 0, ec2Other: 0 };
       row[key] = Number(value || 0);
       byDate.set(date, row);
     };
 
     if (Array.isArray(monthlyJson?.services)) {
       monthlyJson.services.forEach((svc) => {
-        const svcName = String(svc?.service || '').toLowerCase();
-        const isEc2 = svcName.includes('elastic compute cloud') || svcName.includes('ec2') || svcName.includes('compute');
-        const isS3 = svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage');
-        const targetKey = isEc2 ? 'ec2' : isS3 ? 's3' : null;
+        const targetKey = classifyService(svc?.service);
         if (!targetKey) return;
 
         (svc?.daily_costs || []).forEach((d) => {
@@ -86,12 +97,8 @@ export default function CostDashboard({ onBack }) {
       monthlyJson.daily_costs.forEach((day) => {
         const date = day?.date;
         (day?.services || []).forEach((svc) => {
-          const svcName = String(svc?.service || '').toLowerCase();
-          if (svcName.includes('ec2') || svcName.includes('compute')) {
-            putPoint(date, 'ec2', svc?.cost_usd);
-          } else if (svcName.includes('s3') || svcName.includes('storage')) {
-            putPoint(date, 's3', svc?.cost_usd);
-          }
+          const targetKey = classifyService(svc?.service);
+          if (targetKey) putPoint(date, targetKey, svc?.cost_usd);
         });
       });
     }
@@ -99,6 +106,7 @@ export default function CostDashboard({ onBack }) {
     const labels = Array.from(byDate.keys()).sort();
     const ec2Data = labels.map((d) => byDate.get(d)?.ec2 ?? 0);
     const s3Data = labels.map((d) => byDate.get(d)?.s3 ?? 0);
+    const ec2OtherData = labels.map((d) => byDate.get(d)?.ec2Other ?? 0);
 
     if (labels.length === 0) return null;
 
@@ -121,6 +129,14 @@ export default function CostDashboard({ onBack }) {
           tension: 0.25,
           pointRadius: 2,
         },
+        {
+          label: 'EC2 - Other',
+          data: ec2OtherData,
+          borderColor: '#ef6c00',
+          backgroundColor: 'rgba(239,108,0,0.18)',
+          tension: 0.25,
+          pointRadius: 2,
+        },
       ],
     };
   };
@@ -128,19 +144,30 @@ export default function CostDashboard({ onBack }) {
   const buildMonthlyChartData = (monthlyJson) => {
     const byMonth = new Map();
 
+    const classifyService = (serviceName) => {
+      const svcName = String(serviceName || '').toLowerCase();
+      if (svcName.includes('ec2 - other') || (svcName.includes('ec2') && svcName.includes('other'))) {
+        return 'ec2Other';
+      }
+      if (svcName.includes('elastic compute cloud') || svcName.includes('ec2') || svcName.includes('compute')) {
+        return 'ec2';
+      }
+      if (svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage')) {
+        return 's3';
+      }
+      return null;
+    };
+
     const putPoint = (month, key, value) => {
       if (!month) return;
-      const row = byMonth.get(month) || { ec2: 0, s3: 0 };
+      const row = byMonth.get(month) || { ec2: 0, s3: 0, ec2Other: 0 };
       row[key] = Number(value || 0);
       byMonth.set(month, row);
     };
 
     if (Array.isArray(monthlyJson?.services)) {
       monthlyJson.services.forEach((svc) => {
-        const svcName = String(svc?.service || '').toLowerCase();
-        const isEc2 = svcName.includes('elastic compute cloud') || svcName.includes('ec2') || svcName.includes('compute');
-        const isS3 = svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage');
-        const targetKey = isEc2 ? 'ec2' : isS3 ? 's3' : null;
+        const targetKey = classifyService(svc?.service);
         if (!targetKey) return;
 
         (svc?.monthly_costs || []).forEach((d) => {
@@ -152,6 +179,7 @@ export default function CostDashboard({ onBack }) {
     const labels = Array.from(byMonth.keys());
     const ec2Data = labels.map((d) => byMonth.get(d)?.ec2 ?? 0);
     const s3Data = labels.map((d) => byMonth.get(d)?.s3 ?? 0);
+  const ec2OtherData = labels.map((d) => byMonth.get(d)?.ec2Other ?? 0);
 
     if (labels.length === 0) return null;
 
@@ -170,6 +198,13 @@ export default function CostDashboard({ onBack }) {
           data: s3Data,
           backgroundColor: 'rgba(46,125,50,0.65)',
           borderColor: '#2e7d32',
+          borderWidth: 1,
+        },
+        {
+          label: 'EC2 - Other',
+          data: ec2OtherData,
+          backgroundColor: 'rgba(239,108,0,0.7)',
+          borderColor: '#ef6c00',
           borderWidth: 1,
         },
       ],
@@ -206,7 +241,7 @@ export default function CostDashboard({ onBack }) {
       const dailyChartData = buildDailyChartData(json);
       const monthlyChartData = buildMonthlyChartData(json);
       if (!dailyChartData && !monthlyChartData) {
-        throw new Error('No EC2/S3 cost series found in monthly data file.');
+        throw new Error('No EC2/S3/EC2 - Other cost series found in monthly data file.');
       }
       setGraphModal((prev) => ({
         ...prev,
@@ -303,9 +338,13 @@ export default function CostDashboard({ onBack }) {
   const dailyChartLabels = graphModal.dailyChartData?.labels || [];
   const dailyEc2Series = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'EC2');
   const dailyS3Series = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'S3');
+  const dailyEc2OtherSeries = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'EC2 - Other');
   const monthlyChartLabels = graphModal.monthlyChartData?.labels || [];
   const monthlyEc2Series = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'EC2');
   const monthlyS3Series = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'S3');
+  const monthlyEc2OtherSeries = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'EC2 - Other');
+  const hasDailySeries = Boolean(dailyEc2Series || dailyS3Series || dailyEc2OtherSeries);
+  const hasMonthlySeries = Boolean(monthlyEc2Series || monthlyS3Series || monthlyEc2OtherSeries);
 
   if (loading) return <div className="dashboard-container">Loading AWS account cost data...</div>;
   if (error) return <div className="dashboard-container" style={{ color: 'red' }}>Error: {error}</div>;
@@ -350,7 +389,7 @@ export default function CostDashboard({ onBack }) {
                       <button
                         className="view-res-btn"
                         onClick={() => handleOpenCostGraph(account)}
-                        title="View EC2 and S3 daily cost trend"
+                        title="View EC2, S3, and EC2 - Other cost trends"
                       >
                         Analysis
                       </button>
@@ -394,9 +433,9 @@ export default function CostDashboard({ onBack }) {
           {!graphModal.loading && graphModal.error && (
             <p style={{ color: 'var(--danger, #b00020)' }}>{graphModal.error}</p>
           )}
-          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && dailyEc2Series && dailyS3Series && (
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && hasDailySeries && (
             <div style={{ minWidth: 720, maxWidth: '100%', display: 'grid', gap: 16 }}>
-              <div style={{ height: 260 }}>
+              {dailyEc2Series && <div style={{ height: 260 }}>
                 <Line
                   data={{
                     labels: dailyChartLabels,
@@ -433,9 +472,9 @@ export default function CostDashboard({ onBack }) {
                     },
                   }}
                 />
-              </div>
+              </div>}
 
-              <div style={{ height: 260 }}>
+              {dailyS3Series && <div style={{ height: 260 }}>
                 <Line
                   data={{
                     labels: dailyChartLabels,
@@ -472,12 +511,51 @@ export default function CostDashboard({ onBack }) {
                     },
                   }}
                 />
-              </div>
+              </div>}
+
+              {dailyEc2OtherSeries && <div style={{ height: 260 }}>
+                <Line
+                  data={{
+                    labels: dailyChartLabels,
+                    datasets: [dailyEc2OtherSeries],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: {
+                        callbacks: {
+                          label: function (context) {
+                            const val = Number(context.parsed?.y || 0);
+                            return `${context.dataset.label}: $${val.toFixed(2)}`;
+                          },
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Date' },
+                      },
+                      y: {
+                        type: 'linear',
+                        title: { display: true, text: 'EC2 - Other Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>}
             </div>
           )}
-          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && monthlyEc2Series && monthlyS3Series && (
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && hasMonthlySeries && (
             <div style={{ minWidth: 720, maxWidth: '100%', display: 'grid', gap: 16 }}>
-              <div style={{ height: 260 }}>
+              {monthlyEc2Series && <div style={{ height: 260 }}>
                 <Bar
                   data={{
                     labels: monthlyChartLabels,
@@ -512,9 +590,9 @@ export default function CostDashboard({ onBack }) {
                     },
                   }}
                 />
-              </div>
+              </div>}
 
-              <div style={{ height: 260 }}>
+              {monthlyS3Series && <div style={{ height: 260 }}>
                 <Bar
                   data={{
                     labels: monthlyChartLabels,
@@ -549,14 +627,51 @@ export default function CostDashboard({ onBack }) {
                     },
                   }}
                 />
-              </div>
+              </div>}
+
+              {monthlyEc2OtherSeries && <div style={{ height: 260 }}>
+                <Bar
+                  data={{
+                    labels: monthlyChartLabels,
+                    datasets: [monthlyEc2OtherSeries],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: {
+                        callbacks: {
+                          label: function (context) {
+                            const val = Number(context.parsed?.y || 0);
+                            return `${context.dataset.label}: $${val.toFixed(2)}`;
+                          },
+                        },
+                      },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Month' },
+                      },
+                      y: {
+                        title: { display: true, text: 'EC2 - Other Monthly Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>}
             </div>
           )}
-          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && (!monthlyEc2Series || !monthlyS3Series) && (
-            <p style={{ color: 'var(--danger, #b00020)' }}>Monthly EC2/S3 series could not be rendered for this account.</p>
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && !hasMonthlySeries && (
+            <p style={{ color: 'var(--danger, #b00020)' }}>Monthly EC2/S3/EC2 - Other series could not be rendered for this account.</p>
           )}
-          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && (!dailyEc2Series || !dailyS3Series) && (
-            <p style={{ color: 'var(--danger, #b00020)' }}>Daily EC2/S3 series could not be rendered for this account.</p>
+          {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && !hasDailySeries && (
+            <p style={{ color: 'var(--danger, #b00020)' }}>Daily EC2/S3/EC2 - Other series could not be rendered for this account.</p>
           )}
         </Modal>
       )}
