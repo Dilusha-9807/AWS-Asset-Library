@@ -39,6 +39,8 @@ export default function CostDashboard({ onBack }) {
     activeTab: 'daily',
     dailyChartData: null,
     monthlyChartData: null,
+    dailyTotals: null,
+    monthlyTotals: null,
   });
 
   const closeGraphModal = () => {
@@ -50,6 +52,8 @@ export default function CostDashboard({ onBack }) {
       activeTab: 'daily',
       dailyChartData: null,
       monthlyChartData: null,
+      dailyTotals: null,
+      monthlyTotals: null,
     });
   };
 
@@ -74,12 +78,15 @@ export default function CostDashboard({ onBack }) {
       if (svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage')) {
         return 's3';
       }
+      if (svcName.includes('elastic file system') || svcName.includes('efs')) {
+        return 'efs';
+      }
       return null;
     };
 
     const putPoint = (date, key, value) => {
       if (!date) return;
-      const row = byDate.get(date) || { ec2: 0, s3: 0, ec2Other: 0 };
+      const row = byDate.get(date) || { ec2: 0, s3: 0, ec2Other: 0, efs: 0 };
       row[key] = Number(value || 0);
       byDate.set(date, row);
     };
@@ -107,6 +114,7 @@ export default function CostDashboard({ onBack }) {
     const ec2Data = labels.map((d) => byDate.get(d)?.ec2 ?? 0);
     const s3Data = labels.map((d) => byDate.get(d)?.s3 ?? 0);
     const ec2OtherData = labels.map((d) => byDate.get(d)?.ec2Other ?? 0);
+    const efsData = labels.map((d) => byDate.get(d)?.efs ?? 0);
 
     if (labels.length === 0) return null;
 
@@ -137,6 +145,14 @@ export default function CostDashboard({ onBack }) {
           tension: 0.25,
           pointRadius: 2,
         },
+        {
+          label: 'EFS',
+          data: efsData,
+          borderColor: '#6a1b9a',
+          backgroundColor: 'rgba(106,27,154,0.15)',
+          tension: 0.25,
+          pointRadius: 2,
+        },
       ],
     };
   };
@@ -155,12 +171,15 @@ export default function CostDashboard({ onBack }) {
       if (svcName.includes('simple storage service') || svcName.includes('s3') || svcName.includes('storage')) {
         return 's3';
       }
+      if (svcName.includes('elastic file system') || svcName.includes('efs')) {
+        return 'efs';
+      }
       return null;
     };
 
     const putPoint = (month, key, value) => {
       if (!month) return;
-      const row = byMonth.get(month) || { ec2: 0, s3: 0, ec2Other: 0 };
+      const row = byMonth.get(month) || { ec2: 0, s3: 0, ec2Other: 0, efs: 0 };
       row[key] = Number(value || 0);
       byMonth.set(month, row);
     };
@@ -179,7 +198,8 @@ export default function CostDashboard({ onBack }) {
     const labels = Array.from(byMonth.keys());
     const ec2Data = labels.map((d) => byMonth.get(d)?.ec2 ?? 0);
     const s3Data = labels.map((d) => byMonth.get(d)?.s3 ?? 0);
-  const ec2OtherData = labels.map((d) => byMonth.get(d)?.ec2Other ?? 0);
+    const ec2OtherData = labels.map((d) => byMonth.get(d)?.ec2Other ?? 0);
+    const efsData = labels.map((d) => byMonth.get(d)?.efs ?? 0);
 
     if (labels.length === 0) return null;
 
@@ -206,6 +226,87 @@ export default function CostDashboard({ onBack }) {
           backgroundColor: 'rgba(239,108,0,0.7)',
           borderColor: '#ef6c00',
           borderWidth: 1,
+        },
+        {
+          label: 'EFS',
+          data: efsData,
+          backgroundColor: 'rgba(106,27,154,0.65)',
+          borderColor: '#6a1b9a',
+          borderWidth: 1,
+        },
+      ],
+    };
+  };
+
+  const buildDailyTotals = (monthlyJson) => {
+    const totals = new Map();
+
+    const addPoint = (date, value) => {
+      if (!date) return;
+      totals.set(date, (totals.get(date) || 0) + Number(value || 0));
+    };
+
+    if (Array.isArray(monthlyJson?.services)) {
+      monthlyJson.services.forEach((svc) => {
+        (svc?.daily_costs || []).forEach((day) => {
+          addPoint(day?.date, day?.cost_usd);
+        });
+      });
+    } else if (Array.isArray(monthlyJson?.daily_costs)) {
+      monthlyJson.daily_costs.forEach((day) => {
+        (day?.services || []).forEach((svc) => {
+          addPoint(day?.date, svc?.cost_usd);
+        });
+      });
+    }
+
+    return totals;
+  };
+
+  const buildMonthlyTotals = (monthlyJson) => {
+    const totals = new Map();
+
+    if (Array.isArray(monthlyJson?.services)) {
+      monthlyJson.services.forEach((svc) => {
+        (svc?.monthly_costs || []).forEach((monthEntry) => {
+          if (!monthEntry?.month) return;
+          totals.set(
+            monthEntry.month,
+            (totals.get(monthEntry.month) || 0) + Number(monthEntry.cost_usd || 0)
+          );
+        });
+      });
+    }
+
+    return totals;
+  };
+
+  const formatTooltipTotal = (value) => `$${Number(value || 0).toFixed(2)}`;
+
+  const buildTooltipCallbacks = (totalsMap, periodLabel) => ({
+    footer: function (items) {
+      const label = items?.[0]?.label;
+      return label ? `Total for ${periodLabel}: ${formatTooltipTotal(totalsMap?.get(label))}` : '';
+    },
+    label: function (context) {
+      const val = Number(context.parsed?.y || 0);
+      return `${context.dataset.label}: $${val.toFixed(2)}`;
+    },
+  });
+
+  const buildTotalChartData = (labels, totalsMap, datasetLabel) => {
+    if (!Array.isArray(labels) || labels.length === 0) return null;
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: datasetLabel,
+          data: labels.map((label) => Number(totalsMap?.get(label) || 0)),
+          borderColor: '#000000',
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          tension: 0.25,
+          pointRadius: 2,
         },
       ],
     };
@@ -240,6 +341,8 @@ export default function CostDashboard({ onBack }) {
       const json = await res.json();
       const dailyChartData = buildDailyChartData(json);
       const monthlyChartData = buildMonthlyChartData(json);
+      const dailyTotals = buildDailyTotals(json);
+      const monthlyTotals = buildMonthlyTotals(json);
       if (!dailyChartData && !monthlyChartData) {
         throw new Error('No EC2/S3/EC2 - Other cost series found in monthly data file.');
       }
@@ -248,6 +351,8 @@ export default function CostDashboard({ onBack }) {
         loading: false,
         dailyChartData,
         monthlyChartData,
+        dailyTotals,
+        monthlyTotals,
       }));
     } catch (e) {
       setGraphModal((prev) => ({
@@ -339,12 +444,18 @@ export default function CostDashboard({ onBack }) {
   const dailyEc2Series = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'EC2');
   const dailyS3Series = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'S3');
   const dailyEc2OtherSeries = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'EC2 - Other');
+  const dailyEfsSeries = graphModal.dailyChartData?.datasets?.find((d) => d.label === 'EFS');
   const monthlyChartLabels = graphModal.monthlyChartData?.labels || [];
   const monthlyEc2Series = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'EC2');
   const monthlyS3Series = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'S3');
   const monthlyEc2OtherSeries = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'EC2 - Other');
-  const hasDailySeries = Boolean(dailyEc2Series || dailyS3Series || dailyEc2OtherSeries);
-  const hasMonthlySeries = Boolean(monthlyEc2Series || monthlyS3Series || monthlyEc2OtherSeries);
+  const monthlyEfsSeries = graphModal.monthlyChartData?.datasets?.find((d) => d.label === 'EFS');
+  const dailyTotalChartData = buildTotalChartData(dailyChartLabels, graphModal.dailyTotals, 'Total Cost');
+  const monthlyTotalChartData = buildTotalChartData(monthlyChartLabels, graphModal.monthlyTotals, 'Total Cost');
+  const hasDailySeries = Boolean(dailyEc2Series || dailyS3Series || dailyEc2OtherSeries || dailyEfsSeries);
+  const hasMonthlySeries = Boolean(monthlyEc2Series || monthlyS3Series || monthlyEc2OtherSeries || monthlyEfsSeries);
+  const hasDailyTotalSeries = Boolean(dailyTotalChartData);
+  const hasMonthlyTotalSeries = Boolean(monthlyTotalChartData);
 
   if (loading) return <div className="dashboard-container">Loading AWS account cost data...</div>;
   if (error) return <div className="dashboard-container" style={{ color: 'red' }}>Error: {error}</div>;
@@ -447,14 +558,7 @@ export default function CostDashboard({ onBack }) {
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const val = Number(context.parsed?.y || 0);
-                            return `${context.dataset.label}: $${val.toFixed(2)}`;
-                          },
-                        },
-                      },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
                     },
                     scales: {
                       x: {
@@ -486,14 +590,7 @@ export default function CostDashboard({ onBack }) {
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const val = Number(context.parsed?.y || 0);
-                            return `${context.dataset.label}: $${val.toFixed(2)}`;
-                          },
-                        },
-                      },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
                     },
                     scales: {
                       x: {
@@ -525,14 +622,7 @@ export default function CostDashboard({ onBack }) {
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const val = Number(context.parsed?.y || 0);
-                            return `${context.dataset.label}: $${val.toFixed(2)}`;
-                          },
-                        },
-                      },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
                     },
                     scales: {
                       x: {
@@ -541,6 +631,67 @@ export default function CostDashboard({ onBack }) {
                       y: {
                         type: 'linear',
                         title: { display: true, text: 'EC2 - Other Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>}
+
+              {dailyEfsSeries && <div style={{ height: 260 }}>
+                <Line
+                  data={{
+                    labels: dailyChartLabels,
+                    datasets: [dailyEfsSeries],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Date' },
+                      },
+                      y: {
+                        type: 'linear',
+                        title: { display: true, text: 'EFS Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>}
+
+              {hasDailyTotalSeries && <div style={{ height: 280, marginTop: 8 }}>
+                <Line
+                  data={dailyTotalChartData}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Date' },
+                      },
+                      y: {
+                        type: 'linear',
+                        title: { display: true, text: 'Total Cost (USD)' },
                         ticks: {
                           callback: function (value) {
                             return `$${value}`;
@@ -566,14 +717,7 @@ export default function CostDashboard({ onBack }) {
                     maintainAspectRatio: false,
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const val = Number(context.parsed?.y || 0);
-                            return `${context.dataset.label}: $${val.toFixed(2)}`;
-                          },
-                        },
-                      },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.monthlyTotals, 'month') },
                     },
                     scales: {
                       x: {
@@ -603,14 +747,7 @@ export default function CostDashboard({ onBack }) {
                     maintainAspectRatio: false,
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const val = Number(context.parsed?.y || 0);
-                            return `${context.dataset.label}: $${val.toFixed(2)}`;
-                          },
-                        },
-                      },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.monthlyTotals, 'month') },
                     },
                     scales: {
                       x: {
@@ -640,14 +777,7 @@ export default function CostDashboard({ onBack }) {
                     maintainAspectRatio: false,
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const val = Number(context.parsed?.y || 0);
-                            return `${context.dataset.label}: $${val.toFixed(2)}`;
-                          },
-                        },
-                      },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.monthlyTotals, 'month') },
                     },
                     scales: {
                       x: {
@@ -655,6 +785,65 @@ export default function CostDashboard({ onBack }) {
                       },
                       y: {
                         title: { display: true, text: 'EC2 - Other Monthly Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>}
+
+              {monthlyEfsSeries && <div style={{ height: 260 }}>
+                <Bar
+                  data={{
+                    labels: monthlyChartLabels,
+                    datasets: [monthlyEfsSeries],
+                  }}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.monthlyTotals, 'month') },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Month' },
+                      },
+                      y: {
+                        title: { display: true, text: 'EFS Monthly Cost (USD)' },
+                        ticks: {
+                          callback: function (value) {
+                            return `$${value}`;
+                          },
+                        },
+                      },
+                    },
+                  }}
+                />
+              </div>}
+
+              {hasMonthlyTotalSeries && <div style={{ height: 280, marginTop: 8 }}>
+                <Bar
+                  data={monthlyTotalChartData}
+                  options={{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                      legend: { position: 'top' },
+                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.monthlyTotals, 'month') },
+                    },
+                    scales: {
+                      x: {
+                        title: { display: true, text: 'Month' },
+                      },
+                      y: {
+                        type: 'linear',
+                        title: { display: true, text: 'Total Cost (USD)' },
                         ticks: {
                           callback: function (value) {
                             return `$${value}`;

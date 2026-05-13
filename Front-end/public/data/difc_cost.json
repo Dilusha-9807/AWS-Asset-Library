@@ -2,7 +2,7 @@
   "type": "cost",
   "account_name": "prod-difc",
   "region": "eu-west-1",
-  "date_range": "2026-04-20 to 2026-04-21",
+  "date_range": "2026-05-11 to 2026-05-12",
   "services": [
     {
       "service": "Amazon Elastic Compute Cloud - Compute",
@@ -57,12 +57,17 @@
     },
     {
       "service": "Amazon Simple Storage Service",
-      "cost_usd": 216.05,
+      "cost_usd": 74.64,
       "details": []
     },
     {
       "service": "EC2 - Other",
-      "cost_usd": 428.74,
+      "cost_usd": 417.23,
+      "details": []
+    },
+    {
+      "service": "Amazon Elastic File System",
+      "cost_usd": 0.03,
       "details": []
     }
   ]
