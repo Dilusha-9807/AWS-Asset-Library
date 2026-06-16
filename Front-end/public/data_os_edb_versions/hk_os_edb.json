@@ -1,0 +1,72 @@
+{
+    "type": "os_edb_versions",
+    "environment": "HK",
+    "aws_account_id": "884622865327",
+    "timestamp": "2026-06-16 09:33:24.536622",
+    "servers": [
+        {
+            "ip": "10.46.8.8",
+            "port": 5444,
+            "region": "ap-east-1",
+            "ec2_name": "ec2-hk-gtnt-prod-hk-gtnhongkong-booms_db_rocky-01",
+            "edb_version": "EnterpriseDB Advanced Server 15.15.0",
+            "os_version": "Rocky Linux 9.7 (Blue Onyx)"
+        },
+        {
+            "ip": "10.46.8.10",
+            "port": 5444,
+            "region": "ap-east-1",
+            "ec2_name": "ec2-hk-gtnt-prod-hk-gtnhongkong-booms_db_rocky-02",
+            "edb_version": "EnterpriseDB Advanced Server 15.15.0",
+            "os_version": "Rocky Linux 9.7 (Blue Onyx)"
+        },
+        {
+            "ip": "10.46.16.8",
+            "port": 5444,
+            "region": "ap-southeast-1",
+            "ec2_name": "ec2-sg-gtnt-dr-hk-gtnhongkong-booms_db_rocky-01",
+            "edb_version": "EnterpriseDB Advanced Server 15.15.0",
+            "os_version": "Rocky Linux 9.7 (Blue Onyx)"
+        },
+        {
+            "ip": "10.46.10.10",
+            "port": 5445,
+            "region": "ap-east-1",
+            "ec2_name": "ec2-hk-gtnt-prod-hk-gtnhongkong-booms_db_backup_rocky",
+            "edb_version": "EnterpriseDB Advanced Server 15.15.0",
+            "os_version": "Rocky Linux 9.7 (Blue Onyx)"
+        },
+        {
+            "ip": "10.46.8.35",
+            "port": 5444,
+            "region": "ap-east-1",
+            "ec2_name": "ec2-hk-gtnt-prod-hk-gtnhongkong-history_db",
+            "edb_version": "EnterpriseDB Advanced Server 15.15.0",
+            "os_version": "Rocky Linux 9.7 (Blue Onyx)"
+        },
+        {
+            "ip": "10.46.8.30",
+            "port": 27017,
+            "region": "ap-east-1",
+            "ec2_name": "ec2-hk-gtnt-prod-hk-gtnhongkong-mongo_db",
+            "edb_version": "Mongo 8.0.19",
+            "os_version": "Amazon Linux 2023.10.20260202"
+        },
+        {
+            "ip": "10.46.16.20",
+            "port": 27017,
+            "region": "ap-southeast-1",
+            "ec2_name": "ec2-sg-gtnt-dr-hk-gtnhongkong-mongo_db",
+            "edb_version": "Mongo 8.0.19",
+            "os_version": "Amazon Linux 2023.10.20260202"
+        },
+        {
+            "ip": "10.46.10.25",
+            "port": 27017,
+            "region": "ap-east-1",
+            "ec2_name": "ec2-hk-gtnt-prod-hk-gtnhongkong-mongo_db_arbitor",
+            "edb_version": "Mongo 8.0.19",
+            "os_version": "Amazon Linux 2023.10.20260202"
+        }
+    ]
+}

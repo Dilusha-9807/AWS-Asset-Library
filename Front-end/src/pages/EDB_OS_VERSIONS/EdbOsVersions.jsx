@@ -63,6 +63,7 @@ export default function EdbOsVersions({ onBack }) {
     setLoading(true);
     const files = [
       'us_os_edb.json',
+      'hk_os_edb.json',
       'uk_os_edb.json',
       'asia_os_edb.json',
       'difc_os_edb.json',
@@ -523,7 +524,7 @@ export default function EdbOsVersions({ onBack }) {
             </thead>
             <tbody>
               {/* Map each expected region to a row */}
-              {['DIFC', 'FEED', 'ASIA', 'UK', 'US', 'DWM'].map(regionName => {
+              {['DIFC', 'FEED', 'ASIA', 'UK', 'US', 'HK', 'DWM'].map(regionName => {
                 const r = regionsData.find(d => (d.environment || '').toLowerCase() === regionName.toLowerCase());
                 return (
                   <tr key={regionName}>
