@@ -131,10 +131,11 @@ export default function BackupLogs({ onBack }) {
 
   return (
     <div className="dashboard-container" style={{ maxWidth: '52%', width: '52%' }}>
-      <div className="header-row">
-        <button className="back-btn" onClick={onBack}>← Back to list</button>
-        <h1 style={{ margin: 0 }}>Backup Logs</h1>
+      <div className="cost-header-row">
+        <button className="back-btn" onClick={onBack}>← Back</button>
       </div>
+
+      <h1 style={{ marginTop: 0 }}>Backup Logs</h1>
 
       <div className="content-section" style={{ width: '100%' }}>
         {/* Table-style hierarchy with three columns */}

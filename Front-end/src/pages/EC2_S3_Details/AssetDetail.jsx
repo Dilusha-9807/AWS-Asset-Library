@@ -44,59 +44,67 @@ export default function AssetDetail({ name, onBack }) {
     return () => { mounted = false; };
   }, [name]);
 
-  if (loading) return <div className="dashboard-container">Loading assets...</div>;
-  if (error) return <div className="dashboard-container" style={{ color: 'red' }}>Error: {error}</div>;
-
-  const ec2 = data?.Resources?.EC2 || [];
-
-  return (
+    return (
     <div className="dashboard-container">
-      <button className="back-btn" onClick={onBack}>← Back to list</button>
-      <h1>{name} — EC2 Resources</h1>
-      <p>Region: {data.Region} | Timestamp: {data.Timestamp}</p>
+      <div className="cost-header-row">
+        <button className="back-btn" onClick={onBack}>← Back</button>
+      </div>
 
-      {ec2.length === 0 ? (
-        <p>No EC2 resources found.</p>
-      ) : (
-        <table className="cost-table">
-          <thead>
-            <tr>
-              <th>InstanceId</th>
-              <th>Name</th>
-              <th>Type</th>
-              <th>State</th>
-              <th>AZ</th>
-              <th>Private IP</th>
-              <th>Launch Time</th>
-              <th>Volumes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ec2.map((i) => (
-              <tr key={i.InstanceId}>
-                <td>{i.InstanceId}</td>
-                <td>{i.Name}</td>
-                <td>{i.InstanceType}</td>
-                <td>{i.State}</td>
-                <td>{i.AvailabilityZone}</td>
-                <td>{i.PrivateIP}</td>
-                <td>{i.LaunchTime}</td>
-                <td>
-                  {i.Volumes?.length ? (
-                    <button
-                      className="view-res-btn"
-                      onClick={() => setVolModal({ instanceId: i.InstanceId, volumes: i.Volumes })}
-                    >
-                      Volumes ({i.Volumes.length})
-                    </button>
-                  ) : (
-                    <span>-</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {loading && <div>Loading assets...</div>}
+      {error && <div style={{ color: 'red' }}>Error: {error}</div>}
+
+      {!loading && !error && (
+        <>
+          <h1>{name} — EC2 Resources</h1>
+          <p>Region: {data.Region} | Timestamp: {data.Timestamp}</p>
+
+          {(() => {
+            const ec2 = data?.Resources?.EC2 || [];
+            return ec2.length === 0 ? (
+              <p>No EC2 resources found.</p>
+            ) : (
+              <table className="cost-table">
+                <thead>
+                  <tr>
+                    <th>InstanceId</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>State</th>
+                    <th>AZ</th>
+                    <th>Private IP</th>
+                    <th>Launch Time</th>
+                    <th>Volumes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ec2.map((i) => (
+                    <tr key={i.InstanceId}>
+                      <td>{i.InstanceId}</td>
+                      <td>{i.Name}</td>
+                      <td>{i.InstanceType}</td>
+                      <td>{i.State}</td>
+                      <td>{i.AvailabilityZone}</td>
+                      <td>{i.PrivateIP}</td>
+                      <td>{i.LaunchTime}</td>
+                      <td>
+                        {i.Volumes?.length ? (
+                          <button
+                            className="view-res-btn"
+                            onClick={() => setVolModal({ instanceId: i.InstanceId, volumes: i.Volumes })}
+                          >
+                            Volumes ({i.Volumes.length})
+                          </button>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            );
+          })()}
+        </>
       )}
 
       {volModal && (

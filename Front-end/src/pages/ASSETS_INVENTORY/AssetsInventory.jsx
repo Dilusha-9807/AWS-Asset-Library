@@ -398,7 +398,7 @@ export default function AssetsInventory({ onBack }) {
   return (
     <div className="dashboard-container">
       <div className="header-row">
-        <button className="back-btn" onClick={onBack}>← Back to list</button>
+        <button className="back-btn" onClick={onBack}>← Back</button>
         <div className="header-actions">
           <button
             className="download-btn"

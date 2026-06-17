@@ -531,7 +531,9 @@ export default function CostDashboard({ onBack }) {
 
   return (
     <div className="dashboard-container">
-      <button className="back-btn" onClick={onBack}>← Back</button>
+      <div className="cost-header-row">
+        <button className="back-btn" onClick={onBack}>← Back</button>
+      </div>
       <h1>AWS Cost Dashboard</h1>
 
       <div className="accounts-grid">

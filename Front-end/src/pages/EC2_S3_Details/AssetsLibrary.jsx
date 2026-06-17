@@ -22,7 +22,9 @@ export default function AssetsLibrary({ onBack }) {
 
   return (
     <div className="dashboard-container">
-      <button className="back-btn" onClick={onBack}>← Back</button>
+      <div className="cost-header-row">
+        <button className="back-btn" onClick={onBack}>← Back</button>
+      </div>
       {view === 'list' && (
         <div>
           <h1>Assets Library</h1>
