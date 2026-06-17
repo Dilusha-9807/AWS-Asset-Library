@@ -41,6 +41,7 @@ export default function CostDashboard({ onBack }) {
     monthlyChartData: null,
     dailyTotals: null,
     monthlyTotals: null,
+    dailyDetailMetric: '',
   });
 
   const closeGraphModal = () => {
@@ -54,6 +55,7 @@ export default function CostDashboard({ onBack }) {
       monthlyChartData: null,
       dailyTotals: null,
       monthlyTotals: null,
+      dailyDetailMetric: '',
     });
   };
 
@@ -281,7 +283,13 @@ export default function CostDashboard({ onBack }) {
     return totals;
   };
 
-  const formatTooltipTotal = (value) => `$${Number(value || 0).toFixed(2)}`;
+  const formatCurrency = (value) =>
+    `$${Number(value || 0).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+
+  const formatTooltipTotal = (value) => formatCurrency(value);
 
   const buildTooltipCallbacks = (totalsMap, periodLabel) => ({
     footer: function (items) {
@@ -291,6 +299,16 @@ export default function CostDashboard({ onBack }) {
     label: function (context) {
       const val = Number(context.parsed?.y || 0);
       return `${context.dataset.label}: $${val.toFixed(2)}`;
+    },
+  });
+
+  const buildDailyTooltipCallbacks = (totalsMap) => ({
+    label: function (context) {
+      return `${context.dataset.label}: ${formatCurrency(context.parsed?.y)}`;
+    },
+    footer: function (items) {
+      const label = items?.[0]?.label;
+      return label ? `Total for Day: ${formatCurrency(totalsMap?.get(label))}` : '';
     },
   });
 
@@ -322,6 +340,7 @@ export default function CostDashboard({ onBack }) {
       activeTab: 'daily',
       dailyChartData: null,
       monthlyChartData: null,
+      dailyDetailMetric: '',
     });
 
     if (!monthlyFile) {
@@ -457,6 +476,56 @@ export default function CostDashboard({ onBack }) {
   const hasDailyTotalSeries = Boolean(dailyTotalChartData);
   const hasMonthlyTotalSeries = Boolean(monthlyTotalChartData);
 
+  const dailyCombinedDatasets = [
+    dailyEc2Series,
+    dailyS3Series,
+    dailyEc2OtherSeries,
+    dailyEfsSeries,
+  ]
+    .filter(Boolean)
+    .map((series) => ({ ...series, pointRadius: 2 }));
+
+  if (dailyTotalChartData?.datasets?.[0]) {
+    dailyCombinedDatasets.push({
+      ...dailyTotalChartData.datasets[0],
+      label: 'Total for Day',
+      borderColor: '#111827',
+      backgroundColor: 'rgba(17,24,39,0.12)',
+      tension: 0.25,
+      pointRadius: 2,
+    });
+  }
+
+  const dailyCombinedChartData = dailyChartLabels.length
+    ? { labels: dailyChartLabels, datasets: dailyCombinedDatasets }
+    : null;
+
+  const dailyDetailConfigs = [
+    { key: 'ec2', label: 'EC2', series: dailyEc2Series, yTitle: 'EC2 Cost (USD)', color: '#1976d2' },
+    { key: 's3', label: 'S3', series: dailyS3Series, yTitle: 'S3 Cost (USD)', color: '#2e7d32' },
+    {
+      key: 'ec2Other',
+      label: 'EC2 - Other',
+      series: dailyEc2OtherSeries,
+      yTitle: 'EC2 - Other Cost (USD)',
+      color: '#ef6c00',
+    },
+    { key: 'efs', label: 'EFS', series: dailyEfsSeries, yTitle: 'EFS Cost (USD)', color: '#6a1b9a' },
+    {
+      key: 'total',
+      label: 'Total for Day',
+      series: dailyTotalChartData?.datasets?.[0]
+        ? { ...dailyTotalChartData.datasets[0], label: 'Total for Day' }
+        : null,
+      yTitle: 'Total Cost (USD)',
+      color: '#111827',
+    },
+  ];
+
+  const selectedDailyConfig = dailyDetailConfigs.find(
+    (cfg) => cfg.key === graphModal.dailyDetailMetric && cfg.series
+  );
+
   if (loading) return <div className="dashboard-container">Loading AWS account cost data...</div>;
   if (error) return <div className="dashboard-container" style={{ color: 'red' }}>Error: {error}</div>;
 
@@ -521,7 +590,7 @@ export default function CostDashboard({ onBack }) {
       )}
 
       {graphModal.open && (
-        <Modal onClose={closeGraphModal}>
+        <Modal onClose={closeGraphModal} contentClassName="graph-modal-content">
           <h2 style={{ marginTop: 0, marginBottom: 8 }}>{graphModal.accountName} Cost Graph</h2>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: 8, marginBottom: 12 }}>
             <button
@@ -546,11 +615,93 @@ export default function CostDashboard({ onBack }) {
           )}
           {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'daily' && hasDailySeries && (
             <div style={{ minWidth: 720, maxWidth: '100%', display: 'grid', gap: 16 }}>
-              {dailyEc2Series && <div style={{ height: 260 }}>
+              {!graphModal.dailyDetailMetric && dailyCombinedChartData && (
+                <div style={{ display: 'grid', gap: 12 }}>
+                  <div style={{ height: 470 }}>
+                    <Line
+                      data={dailyCombinedChartData}
+                      options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                          legend: { position: 'top' },
+                          tooltip: { callbacks: buildDailyTooltipCallbacks(graphModal.dailyTotals) },
+                        },
+                        scales: {
+                          x: {
+                            title: { display: true, text: 'Date' },
+                          },
+                          y: {
+                            type: 'linear',
+                            title: { display: true, text: 'Cost (USD)' },
+                            ticks: {
+                              callback: function (value) {
+                                return `$${value}`;
+                              },
+                            },
+                          },
+                        },
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      justifyContent: 'flex-end',
+                      gap: 8,
+                    }}
+                  >
+                    {dailyDetailConfigs.map((cfg) => (
+                      <button
+                        key={cfg.key}
+                        className="view-res-btn"
+                        disabled={!cfg.series}
+                        onClick={() =>
+                          setGraphModal((prev) => ({ ...prev, dailyDetailMetric: cfg.key }))
+                        }
+                        style={{
+                          fontSize: 12,
+                          padding: '6px 10px',
+                          background: cfg.color,
+                          border: `1px solid ${cfg.color}`,
+                          color: '#fff',
+                          opacity: cfg.series ? 1 : 0.55,
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {cfg.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedDailyConfig?.series && (
+                <div style={{ display: 'grid', gap: 8 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <button
+                      className="view-res-btn"
+                      onClick={() =>
+                        setGraphModal((prev) => ({ ...prev, dailyDetailMetric: '' }))
+                      }
+                      style={{ fontSize: 12, padding: '6px 10px' }}
+                    >
+                      Back
+                    </button>
+                  </div>
+                  <div style={{ height: 320 }}>
                 <Line
                   data={{
                     labels: dailyChartLabels,
-                    datasets: [dailyEc2Series],
+                    datasets: [selectedDailyConfig.series],
                   }}
                   options={{
                     responsive: true,
@@ -558,7 +709,7 @@ export default function CostDashboard({ onBack }) {
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
                       legend: { position: 'top' },
-                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
+                      tooltip: { callbacks: buildDailyTooltipCallbacks(graphModal.dailyTotals) },
                     },
                     scales: {
                       x: {
@@ -566,7 +717,7 @@ export default function CostDashboard({ onBack }) {
                       },
                       y: {
                         type: 'linear',
-                        title: { display: true, text: 'EC2 Cost (USD)' },
+                        title: { display: true, text: selectedDailyConfig.yTitle },
                         ticks: {
                           callback: function (value) {
                             return `$${value}`;
@@ -576,132 +727,9 @@ export default function CostDashboard({ onBack }) {
                     },
                   }}
                 />
-              </div>}
-
-              {dailyS3Series && <div style={{ height: 260 }}>
-                <Line
-                  data={{
-                    labels: dailyChartLabels,
-                    datasets: [dailyS3Series],
-                  }}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                      legend: { position: 'top' },
-                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
-                    },
-                    scales: {
-                      x: {
-                        title: { display: true, text: 'Date' },
-                      },
-                      y: {
-                        type: 'linear',
-                        title: { display: true, text: 'S3 Cost (USD)' },
-                        ticks: {
-                          callback: function (value) {
-                            return `$${value}`;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>}
-
-              {dailyEc2OtherSeries && <div style={{ height: 260 }}>
-                <Line
-                  data={{
-                    labels: dailyChartLabels,
-                    datasets: [dailyEc2OtherSeries],
-                  }}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                      legend: { position: 'top' },
-                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
-                    },
-                    scales: {
-                      x: {
-                        title: { display: true, text: 'Date' },
-                      },
-                      y: {
-                        type: 'linear',
-                        title: { display: true, text: 'EC2 - Other Cost (USD)' },
-                        ticks: {
-                          callback: function (value) {
-                            return `$${value}`;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>}
-
-              {dailyEfsSeries && <div style={{ height: 260 }}>
-                <Line
-                  data={{
-                    labels: dailyChartLabels,
-                    datasets: [dailyEfsSeries],
-                  }}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                      legend: { position: 'top' },
-                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
-                    },
-                    scales: {
-                      x: {
-                        title: { display: true, text: 'Date' },
-                      },
-                      y: {
-                        type: 'linear',
-                        title: { display: true, text: 'EFS Cost (USD)' },
-                        ticks: {
-                          callback: function (value) {
-                            return `$${value}`;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>}
-
-              {hasDailyTotalSeries && <div style={{ height: 280, marginTop: 8 }}>
-                <Line
-                  data={dailyTotalChartData}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                      legend: { position: 'top' },
-                      tooltip: { callbacks: buildTooltipCallbacks(graphModal.dailyTotals, 'day') },
-                    },
-                    scales: {
-                      x: {
-                        title: { display: true, text: 'Date' },
-                      },
-                      y: {
-                        type: 'linear',
-                        title: { display: true, text: 'Total Cost (USD)' },
-                        ticks: {
-                          callback: function (value) {
-                            return `$${value}`;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>}
+                  </div>
+                </div>
+              )}
             </div>
           )}
           {!graphModal.loading && !graphModal.error && graphModal.activeTab === 'monthly' && hasMonthlySeries && (
